@@ -29,3 +29,26 @@ def createDB():
     #        mydb.close()
     #        print("MySQL connection is closed")
 
+
+def check_client(user):
+    """Check if a client is already insert into database"""
+    #Open database connection.
+    connection = mysql.connector.connect(host='localhost', user='root')
+
+    #Prepare a cursor to work with database.
+    cursor = connection.cursor()
+
+    #We suppose  that the database has been already created.
+  #  cursor.execute("USE Biglietteria_Storico;")
+
+    cursor.execute("SELECT CF FROM clienti")
+    clients = cursor.fetchall()
+    correct_client = False
+
+    #Check if the client Fiscal Code is in the database.
+    for row in clients:
+        if row[0] == user:
+            correct_client = True
+
+    return correct_client
+
