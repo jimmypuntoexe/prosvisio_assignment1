@@ -30,9 +30,32 @@ def createDB():
     #        mydb.close()
     #        print("MySQL connection is closed")
 
+
 def default_values():
     Cinema = [(1,"The Space",16,"Vimercate"),(2,"Arcadia",12,"Bellinzago"),(3,"The movie",8,"Busnago"),(4,"The Space",10,"Torino"),(5,"Arcadia",10,"Melzo")]
     Film = [(1,"Armagheddon","Micheal Bay",240,"Drammatico",1998),(2,"Le iene","Tarantino",200,"Azione",2001),(3,"Pulp Fiction","Tarantino",196,"Azione",2002),(4,"Transformers","Micheal Bay",190,"Fantascienza",2000),
     (5,"Il signore degli anelli","Peter Jackson",178,"Epico",2001),(6,"Avengers:end game","Fratelli Russo",181,"Azione",2019)]
     #Clienti =
+def check_client(user):
+    """Check if a client is already insert into database"""
+    #Open database connection.
+    connection = mysql.connector.connect(host='localhost', user='root')
+
+    #Prepare a cursor to work with database.
+    cursor = connection.cursor()
+
+    #We suppose  that the database has been already created.
+  #  cursor.execute("USE Biglietteria_Storico;")
+
+    cursor.execute("SELECT CF FROM clienti")
+    clients = cursor.fetchall()
+    correct_client = False
+
+    #Check if the client Fiscal Code is in the database.
+    for row in clients:
+        if row[0] == user:
+            correct_client = True
+
+    return correct_client
+
 

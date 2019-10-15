@@ -1,15 +1,15 @@
 import sys
-import database_functions
+import Back_Database
 
 #Database initialize
-database_functions.initialize_database()
+Back_Database.initialize_database()
 
 #Insert the Fiscal Code to login.
 CFUSER = input("Insert your Fiscal Code to login: ")
-
+'''
 #Check if the Fiscal Code is in the database.
 #Otherwise, you can register it as a new user.
-if not database_functions.check_client(CFUSER):
+if not Back_Database.check_client(CFUSER):
     #Insert new uder after checks.
     REGISTER = input("Fiscal Code doesn't exist! Do you want to register as new user? (y/n): ")
 
@@ -26,7 +26,7 @@ if not database_functions.check_client(CFUSER):
     while(CF_OK) is False:
         CF = input("Error: Fiscal code invalid. Please reinsert it: ")
         CF_OK = database_functions.check_fiscal_code(FC)
-'''
+
     #Insert a new Name and check it.
     N = input("Please insert your Name: ")
     N_OK = database_functions.check_name(N)
