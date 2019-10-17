@@ -18,13 +18,13 @@ def createDB():
             mycursor = mydb.cursor()
             mycursor.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
             mycursor.execute("USE Biglietteria_Storico")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT AUTO_INCREMENT PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50), numsale INT)")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT AUTO_INCREMENT PRIMARY KEY, Titolo VARCHAR(50),Regista VARCHAR(50), durata INT, genere VARCHAR(50), anno YEAR)")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Clienti (CF VARCHAR(45) PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Cinema(idFilm),FOREIGN KEY(CF) REFERENCES Cinema(CF))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT AUTO_INCREMENT PRIMARY KEY, Titolo VARCHAR(50),Regista VARCHAR(50))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT AUTO_INCREMENT PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(45) PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT, idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),FOREIGN KEY(CF) REFERENCES Cliente(CF))")
+            default_values(mycursor,mydb)
     except Error as e:
         print("Error while connecting to MySQL", e)
-        default_values()
     #finally:
     #    if (mydb.is_connected()):
     #        mycursor.close()
@@ -32,6 +32,7 @@ def createDB():
     #        print("MySQL connection is closed")
 
 
+<<<<<<< HEAD
 def default_values():
     Cinema = [(1,"The Space",16,"Vimercate"),(2,"Arcadia",12,"Bellinzago"),(3,"The movie",8,"Busnago"),(4,"The Space",10,"Torino"),(5,"Arcadia",10,"Melzo")]
     Film = [(1,"Armagheddon","Micheal Bay",240,"Drammatico",1998),(2,"Le iene","Tarantino",200,"Azione",2001),(3,"Pulp Fiction","Tarantino",196,"Azione",2002),(4,"Transformers","Micheal Bay",190,"Fantascienza",2000),
@@ -40,6 +41,38 @@ def default_values():
 
 
 def check_user(user):
+=======
+def default_values(cursor,mydb):
+    Cinema = [(1,"The Space","Vimercate"),(2,"Arcadia","Bellinzago"),(3,"The movie","Busnago"),(4,"The Space","Torino"),(5,"Arcadia","Melzo")]
+    Film = [(1,"Armagheddon","Micheal Bay"),(2,"Le iene","Tarantino"),(3,"Pulp Fiction","Tarantino"),(4,"Transformers","Micheal Bay"),
+    (5,"Il signore degli anelli","Peter Jackson"),(6,"Avengers:end game","Fratelli Russo")]
+    Clienti = [("CF1","Alessandro","Guidi",24),("CF2","Carlo","Caru",23),("CF3","Andrea","Carubelli",23),("CF4","Leo","Lozio",24),("CF5","Gimmy","Baldu",24),("CF6","Mario","Bianchi",45)]
+    #Biglietto = [("D",15,"CF1",1,1,8,11/10/2019),("D",16,"CF2",1,1,8,11/10/2019),("E",1,"CF3",1,1,8,11/10/2019),("D",15,"CF4",1,2,2,11/10/2019),("E",1,"CF5",1,2,2,11/10/2019),
+    #("G",13,"CF4",2,2,6,7/10/2019),("I",2,"CF4",2,2,6,17/10/2019)]
+    sql_query_C= """INSERT INTO Cinema (IdCinema, Nome, Città, numsale) VALUES (%d, %s, %s) """
+    sql_query_F= """INSERT INTO Film (IdFilm, Titolo, Regista) VALUES (%d, %s, %s) """
+    sql_query_Cl= """INSERT INTO Cliente (CF, Nome, Città) VALUES (%s, %s, %s) """
+    #sql_query_B=("""INSERT INTO Biglietto (Posto, Fila, Sala, data, ) VALUES (%d, %s, %s, %d) """)
+    try:
+        cursor.execute(sql_query_C,Cinema)
+        mydb.commit()
+    except:
+        mydb.rollback()
+
+    try:
+        cursor.execute(sql_query_F,Film)
+        mydb.commit()
+    except:
+        mydb.rollback()
+    
+    try:
+        cursor.execute(sql_query_Cl,Clienti)
+        mydb.commit()
+    except:
+        mydb.rollback()
+        
+def check_client(user):
+>>>>>>> refs/remotes/origin/master
     """Check if a client is already insert into database"""
     #Open database connection.
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
