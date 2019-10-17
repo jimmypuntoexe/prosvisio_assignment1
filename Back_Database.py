@@ -32,16 +32,10 @@ def createDB():
     #        print("MySQL connection is closed")
 
 
-<<<<<<< HEAD
-def default_values():
-    Cinema = [(1,"The Space",16,"Vimercate"),(2,"Arcadia",12,"Bellinzago"),(3,"The movie",8,"Busnago"),(4,"The Space",10,"Torino"),(5,"Arcadia",10,"Melzo")]
-    Film = [(1,"Armagheddon","Micheal Bay",240,"Drammatico",1998),(2,"Le iene","Tarantino",200,"Azione",2001),(3,"Pulp Fiction","Tarantino",196,"Azione",2002),(4,"Transformers","Micheal Bay",190,"Fantascienza",2000),
-    (5,"Il signore degli anelli","Peter Jackson",178,"Epico",2001),(6,"Avengers:end game","Fratelli Russo",181,"Azione",2019)]
-    #Clienti =
 
 
-def check_user(user):
-=======
+
+
 def default_values(cursor,mydb):
     Cinema = [(1,"The Space","Vimercate"),(2,"Arcadia","Bellinzago"),(3,"The movie","Busnago"),(4,"The Space","Torino"),(5,"Arcadia","Melzo")]
     Film = [(1,"Armagheddon","Micheal Bay"),(2,"Le iene","Tarantino"),(3,"Pulp Fiction","Tarantino"),(4,"Transformers","Micheal Bay"),
@@ -72,7 +66,6 @@ def default_values(cursor,mydb):
         mydb.rollback()
         
 def check_client(user):
->>>>>>> refs/remotes/origin/master
     """Check if a client is already insert into database"""
     #Open database connection.
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
