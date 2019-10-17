@@ -64,83 +64,18 @@ def default_values(cursor,mydb):
         mydb.commit()
     except:
         mydb.rollback()
-        
-def check_user(user):
-    """Check if a client is already insert into database"""
+
+
+def select_cinema():
+    
     #Open database connection.
-    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
+    connection = mysql.connector.connect(host='localhost', user='root', passwd = 'root')
 
     #Prepare a cursor to work with database.
     cursor = connection.cursor()
 
     #We suppose  that the database has been already created.
-    cursor.execute("USE Biglietteria_Storico;")
+    cursor.execute("USE Biglietteria_Storico")
 
-    cursor.execute("SELECT CF FROM clienti")
-    users = cursor.fetchall()
-    check = False
-
-    #Check if  user Fiscal Code is already in the database.
-    for row in users:
-        if row[0] == user:
-            check = True
-
-    return check
-
-
-    #Check if Name is valid.
-def check_nome(nome):
-    """Check if a name is valid"""
-    if not nome:
-        return False
-
-    for i in range(0, len(nome)):
-        if (not(nome[i] >= 'a' and nome[i] <= 'z') \
-            and not (nome[i] >= 'A' and nome[i] <= 'Z') \
-            and not nome[i] == ' '):
-            return False
-
-    return True
-
-
-#Check if Surname is valid.
-def check_cognome(cognome):
-    """Check if a surname is valid"""
-    if not cognome:
-        return False
-
-    for i in range(0, len(cognome)):
-        if (not (cognome[i] >= 'a' and cognome[i] <= 'z') \
-            and not (cognome[i] >= 'A' and cognome[i] <= 'Z') \
-            and not cognome[i] == ' '):
-            return False
-
-    return True
-
-#Check if Date is valid.
-def check_data(DATE):
-    """Check if a date is valid"""
-    if not DATE:
-        return False
-
-    pattern = re.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")
-    if not bool(pattern.match(DATE)):
-        return False
-
-    return True
-
-def check_eta(age):
-    check = True
-    if (age < 10 or age > 130) :
-        check = False
-    return check
-
-
-#check if fiscal code is valid
-def check_codice_fiscale(code):
-    """Check if a fiscal code is valid"""
-    check = True
-    if (len(code) != 16) :
-        check = False
-    return check
-
+    cursor.execute("SELECT * from Cinema")
+    return cursor.fetchall()
