@@ -112,7 +112,7 @@ def check_cognome(cognome):
     if not cognome:
         return False
 
-    for i in range(0, len(cognome)):
+    for i in range(0, len(cognome)): 
         if (not (cognome[i] >= 'a' and cognome[i] <= 'z') \
             and not (cognome[i] >= 'A' and cognome[i] <= 'Z') \
             and not cognome[i] == ' '):
