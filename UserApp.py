@@ -2,14 +2,14 @@ import sys
 import Back_Database
 
 #Database initialize
-Back_Database.initialize_database()
+Back_Database.createDB()
 
 #Insert the Fiscal Code to login.
 CFUSER = input("Insert your Fiscal Code to login: ")
-'''
+
 #Check if the Fiscal Code is in the database.
 #Otherwise, you can register it as a new user.
-if not Back_Database.check_client(CFUSER):
+if not Back_Database.check_user(CFUSER):
     #Insert new uder after checks.
     REGISTER = input("Fiscal Code doesn't exist! Do you want to register as new user? (y/n): ")
 

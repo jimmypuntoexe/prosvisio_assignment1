@@ -5,6 +5,7 @@ from mysql.connector import Error
 import sqlite3
 import datetime
 
+
 def createDB():
     mydb = mysql.connector
     try:
@@ -36,22 +37,24 @@ def default_values():
     Film = [(1,"Armagheddon","Micheal Bay",240,"Drammatico",1998),(2,"Le iene","Tarantino",200,"Azione",2001),(3,"Pulp Fiction","Tarantino",196,"Azione",2002),(4,"Transformers","Micheal Bay",190,"Fantascienza",2000),
     (5,"Il signore degli anelli","Peter Jackson",178,"Epico",2001),(6,"Avengers:end game","Fratelli Russo",181,"Azione",2019)]
     #Clienti =
-def check_client(user):
+
+
+def check_user(user):
     """Check if a client is already insert into database"""
     #Open database connection.
-    connection = mysql.connector.connect(host='localhost', user='root')
+    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
 
     #Prepare a cursor to work with database.
     cursor = connection.cursor()
 
     #We suppose  that the database has been already created.
-  #  cursor.execute("USE Biglietteria_Storico;")
+    cursor.execute("USE Biglietteria_Storico;")
 
     cursor.execute("SELECT CF FROM clienti")
     clients = cursor.fetchall()
     correct_client = False
 
-    #Check if the client Fiscal Code is in the database.
+    #Check if  user Fiscal Code is already in the database.
     for row in clients:
         if row[0] == user:
             correct_client = True
