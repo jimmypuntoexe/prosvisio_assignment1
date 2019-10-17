@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import re
 import mysql.connector
 from mysql.connector import Error
 import sqlite3
@@ -89,7 +89,7 @@ def check_user(user):
 
 
     #Check if Name is valid.
-def check_name(nome):
+def check_nome(nome):
     """Check if a name is valid"""
     if not nome:
         return False
@@ -104,7 +104,7 @@ def check_name(nome):
 
 
 #Check if Surname is valid.
-def check_surname(cognome):
+def check_cognome(cognome):
     """Check if a surname is valid"""
     if not cognome:
         return False
@@ -118,7 +118,7 @@ def check_surname(cognome):
     return True
 
 #Check if Date is valid.
-def check_date(DATE):
+def check_data(DATE):
     """Check if a date is valid"""
     if not DATE:
         return False
