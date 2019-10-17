@@ -22,50 +22,33 @@ if not Back_Database.check_user(CFUSER):
 
     #Insert a new Fiscal Code and check it.
     CF = input("Please insert your Fiscal Code: ")
-    CF_OK = database_functions.check_fiscal_code(CF)
-    while(CF_OK) is False:
+    CF_CHECKED = Back_Database.check_codice_fiscale(CF)
+    while(CF_CHECKED) is False:
         CF = input("Error: Fiscal code invalid. Please reinsert it: ")
-        CF_OK = database_functions.check_fiscal_code(FC)
+        CF_CHECKED = Back_Database.check_codice_fiscale(CF)
 
     #Insert a new Name and check it.
-    N = input("Please insert your Name: ")
-    N_OK = database_functions.check_name(N)
-    while (N_OK) is False:
-        N = input("Error: Name invalid. Please reinsert it: ")
-        N_OK = database_functions.check_name(N)
+    NAME = input("Please insert your Name: ")
+    NAME_CHECKED = Back_Database.check_nome(NAME)
+    while (NAME_CHECKED) is False:
+        NAME = input("Error: Name invalid. Please reinsert it: ")
+        NAME_CHECKED = Back_Database.check_nome(NAME)
 
     #Insert a new Surname and check it.
-    S = input("Please insert your Surname: ")
-    S_OK = database_functions.check_surname(S)
-    while(S_OK) is False:
-        S = input("Error: Surname invalid. Please reinsert it: ")
-        S_OK = database_functions.check_surname(S)
+    SURNAME = input("Please insert your Surname: ")
+    SURNAME_CHECKED = Back_Database.check_cognome(SURNAME)
+    while(SURNAME_CHECKED) is False:
+        SURNAME = input("Surname invalid. Please reinsert it: ")
+        SURNAME_CHECKED = Back_Database.check_cognome(SURNAME)
 
-    #Insert a new Date of Birth and check it.
-    D = input("Please insert your Date Of Birth (yyyy-mm-dd): ")
-    D_OK = database_functions.check_date(D)
-    while(D_OK) is False:
-        D = input("Error: Date invalid. Please reinsert it with format YYYY-MM-DD: ")
-        D_OK = database_functions.check_date(D)
-
-    #Insert a new Place of Birth and check it.
-    P = input("Please insert your Place of Birth: ")
-    P_OK = database_functions.check_place_of_birth(P)
-    while(P_OK) is False:
-        P = input("Error: Place of Birth invalid. Please reinsert it: ")
-        P_OK = database_functions.check_place_of_birth(P)
-
-    #Insert a new Sex and check it.
-    SEX = input("Please insert your Sex (m/f): ")
-    SEX_OK = database_functions.check_sex(SEX)
-    while(SEX_OK) is False:
-        SEX = input("Error: Sex invalid. Please reinsert it: ")
-        SEX_OK = database_functions.check_sex(SEX)
-
-    #Add the new client to database.
-    database_functions.add_client(FC, N, S, D, P, SEX)
-
-print("WELCOME TO RENTAL CAR!")
+    #Insert age and check it.
+    AGE = input("Please insert your Surname: ")
+    AGE_CHECKED = Back_Database.check_eta(AGE)
+    while(AGE_CHECKED) is False:
+        AGE = input("Age invalid. Please reinsert it: ")
+        AGE_CHECKED = Back_Database.check_eta(AGE)
+'''
+print("In wich cinema you want to go")
 print("Here's a list of cars you can rent. Rent a car by tiping the license plate!")
 print("||  PLATE  ||  BRAND  ||  MODEL  ||  PRICE  ||")
 CARS = database_functions.show_car()

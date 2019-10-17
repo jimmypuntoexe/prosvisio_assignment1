@@ -129,5 +129,18 @@ def check_data(DATE):
 
     return True
 
+def check_eta(age):
+    check = True
+    if (age < 10 or age > 130) :
+        check = False
+    return check
 
+
+#check if fiscal code is valid
+def check_codice_fiscale(code):
+    """Check if a fiscal code is valid"""
+    check = True
+    if (len(code) != 16) :
+        check = False
+    return check
 
