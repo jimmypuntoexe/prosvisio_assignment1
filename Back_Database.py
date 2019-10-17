@@ -65,7 +65,7 @@ def default_values(cursor,mydb):
     except:
         mydb.rollback()
         
-def check_client(user):
+def check_user(user):
     """Check if a client is already insert into database"""
     #Open database connection.
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
@@ -77,14 +77,57 @@ def check_client(user):
     cursor.execute("USE Biglietteria_Storico;")
 
     cursor.execute("SELECT CF FROM clienti")
-    clients = cursor.fetchall()
-    correct_client = False
+    users = cursor.fetchall()
+    check = False
 
     #Check if  user Fiscal Code is already in the database.
-    for row in clients:
+    for row in users:
         if row[0] == user:
-            correct_client = True
+            check = True
 
-    return correct_client
+    return check
+
+
+    #Check if Name is valid.
+def check_name(nome):
+    """Check if a name is valid"""
+    if not nome:
+        return False
+
+    for i in range(0, len(nome)):
+        if (not(nome[i] >= 'a' and nome[i] <= 'z') \
+            and not (nome[i] >= 'A' and nome[i] <= 'Z') \
+            and not nome[i] == ' '):
+            return False
+
+    return True
+
+
+#Check if Surname is valid.
+def check_surname(cognome):
+    """Check if a surname is valid"""
+    if not cognome:
+        return False
+
+    for i in range(0, len(cognome)):
+        if (not (cognome[i] >= 'a' and cognome[i] <= 'z') \
+            and not (cognome[i] >= 'A' and cognome[i] <= 'Z') \
+            and not cognome[i] == ' '):
+            return False
+
+    return True
+
+#Check if Date is valid.
+def check_date(DATE):
+    """Check if a date is valid"""
+    if not DATE:
+        return False
+
+    pattern = re.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")
+    if not bool(pattern.match(DATE)):
+        return False
+
+    return True
+
 
 
