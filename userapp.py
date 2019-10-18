@@ -1,3 +1,4 @@
+ #!/usr/bin/env python
 import sys
 import Back_Database
 import Check_Functions
@@ -54,25 +55,25 @@ CINEMA = Back_Database.select_cinema()
 for row in CINEMA:
     print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
         " || ")
-Cinema_Id = input("You want to go to the cinema n°: ")
+cinema_id = input("You want to go to the cinema n°: ")
 
 #Check if the Cinema Id inserted is correct.
-CHOICE_CHECK = Check_Functions.check_number_cinema(int(Cinema_Id))
+CHOICE_CHECK = Check_Functions.check_number_cinema(int(cinema_id))
 while(CHOICE_CHECK) is False:
     CHECK = input("Error: Cinena invalid. Please reinsert it: ")
-    CHOICE_CHECK = Check_Functions.check_number_cinema(int(Cinema_Id))
+    CHOICE_CHECK = Check_Functions.check_number_cinema(int(cinema_id))
 
 print("What movie do you want to see?")
 
-Film = Back_Database.select_film()
-for row in Film:
+film = Back_Database.select_film()
+for row in film:
     print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
         " || ")
-Film_id = input("You want to see the film n°: ")
+film_id = input("You want to see the film n°: ")
 #Check if the Film id is correct.
-CHOICE_CHECK = Check_Functions.check_number_film(int(Film_id))
+CHOICE_CHECK = Check_Functions.check_number_film(int(film_id))
 while(CHOICE_CHECK) is False:
     CHECK = input("Error: Film invalid. Please reinsert it: ")
-    CHOICE_CHECK = Check_Functions.check_number_film(int(Film_id))
+    CHOICE_CHECK = Check_Functions.check_number_film(int(film_id))
 
-Back_Database.print_biglietto(CFUSER, Cinema_Id, Film_id)
+Back_Database.print_biglietto(CFUSER, cinema_id, film_id)
