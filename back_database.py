@@ -8,32 +8,33 @@ import random
 import string
 
 '''create database'''
+
 def create_db():
     MYDB = mysql.connector
     try:
         mydb = mysql.connector.connect(host="localhost", \
             user="root", passwd="root")
         if mydb.is_connected():
-            MYCURSOR = mydb.cursor()
-            MYCURSOR.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
-            MYCURSOR.execute("USE Biglietteria_Storico")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
+            mycursor = mydb.cursor()
+            mycursor.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
+            mycursor.execute("USE Biglietteria_Storico")
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
                  Titolo VARCHAR(50),Regista VARCHAR(50))")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
                 PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
                  PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
+            mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
                 Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT,\
                 idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
                 Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
                 FOREIGN KEY(CF) REFERENCES Cliente(CF))")
-            default_values(MYCURSOR, MYDB)
+            default_values(mycursor, MYDB)
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
         if mydb.is_connected():
-            MYCURSOR.close()
+            mycursor.close()
             mydb.close()
             print("MySQL connection is closed")
 
@@ -67,14 +68,12 @@ def default_values(CURSOR, MYDB):
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         MYDB.rollback()
-
     try:
         CURSOR.executemany(SQL_QUERTY_F, FILM)
         MYDB.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        MYDB.rollback()
-    
+        MYDB.rollback()    
     try:
         CURSOR.executemany(SQL_QUERTY_CL, CLIENTI)
         MYDB.commit()
