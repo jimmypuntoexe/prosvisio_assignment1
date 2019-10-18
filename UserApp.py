@@ -20,7 +20,6 @@ if not Check_Functions.check_user(CFUSER):
     if REGISTER == "n":
         print("Thanks to visit us")
         sys.exit()
-
     #Insert a new Fiscal Code and check it.
     CF = input("Please insert your Fiscal Code: ")
     CF_CHECKED = Check_Functions.check_codice_fiscale(CF)
@@ -52,24 +51,30 @@ if not Check_Functions.check_user(CFUSER):
 print("In wich cinema you want to go?")
 
 CINEMA = Back_Database.select_cinema()
-print(CINEMA)
 for row in CINEMA:
     print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
-        " || " + str(row[3]) + " ||")
+        " || ")
 CHOICE = input("You want to go to the cinema n°: ")
 
-#Check if the plate inserted is correct.
+#Check if the Cinema Id inserted is correct.
 CHOICE_CHECK = Check_Functions.check_number_cinema(int(CHOICE))
 while(CHOICE_CHECK) is False:
-    CHECK = input("Error: Plate invalid. Please reinsert it: ")
+    CHECK = input("Error: Cinena invalid. Please reinsert it: ")
     CHOICE_CHECK = Check_Functions.check_number_cinema(int(CHOICE))
-'''
-#Check if the plate is in the Car table.
-PLATE_EXISTING = database_functions.check_plate_existing(PLATE)
-while(PLATE_EXISTING) is False:
-    PLATE = input("Error: Car ins't available for rent. Please reinsert the car plate: ")
-    PLATE_OK = database_functions.check_plate(PLATE)
 
+print("What movie do you want to see?")
+
+Film = Back_Database.select_film()
+for row in Film:
+    print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
+        " || ")
+CHOICE = input("You want to see the film n°: ")
+#Check if the Film id is correct.
+CHOICE_CHECK = Check_Functions.check_number_film(int(CHOICE))
+while(CHOICE_CHECK) is False:
+    CHECK = input("Error: Film invalid. Please reinsert it: ")
+    CHOICE_CHECK = Check_Functions.check_number_film(int(CHOICE))
+'''
     while(PLATE_OK) is False:
         PLATE = input("Error: Plate invalid. Please reinsert it: ")
         PLATE_OK = database_functions.check_plate(PLATE)

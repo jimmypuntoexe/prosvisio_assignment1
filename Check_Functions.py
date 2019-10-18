@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 import sqlite3
-import datetime
+#import datetime
 
 
 def check_user(user):
@@ -77,6 +77,13 @@ def check_codice_fiscale(code):
 #check if the choice of cinema is correct
 def check_number_cinema(cinema) :
     check = True 
-    if (cinema <= 1 or cinema > 4 ) :
+    if (cinema < 1 or cinema > 4 ) :
+        check = False
+    return check
+
+#check if the choice of film is correct
+def check_number_film(film) :
+    check = True 
+    if (film < 1 or film > 6) :
         check = False
     return check
