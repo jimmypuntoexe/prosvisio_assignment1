@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#import re
+'''manage database'''
 import mysql.connector
 from mysql.connector import Error
 import sqlite3
@@ -7,14 +7,14 @@ import datetime
 import random
 import string
 
-
-def createDB():
+'''create database'''
+def create_db():
     MYDB = mysql.connector
     try:
-        MYDB = mysql.connector.connect(host="localhost", \
+        mydb = mysql.connector.connect(host="localhost", \
             user="root", passwd="root")
-        if MYDB.is_connected():
-            MYCURSOR = MYDB.cursor()
+        if mydb.is_connected():
+            MYCURSOR = mydb.cursor()
             MYCURSOR.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
             MYCURSOR.execute("USE Biglietteria_Storico")
             MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
@@ -32,9 +32,9 @@ def createDB():
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
-        if MYDB.is_connected():
+        if mydb.is_connected():
             MYCURSOR.close()
-            MYDB.close()
+            mydb.close()
             print("MySQL connection is closed")
 
 
@@ -44,11 +44,11 @@ def createDB():
 
 def default_values(CURSOR, MYDB):
     CINEMA = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
-        ("3", "The movie" ,"Busnago"), ("4", "The Space", "Torino"),\
+        ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
         ("5", "Arcadia", "Melzo")]
     FILM = [("1", "Armagheddon", "Micheal Bay"), ("2", "Le iene", "Tarantino"),\
         ("3", "Pulp Fiction", "Tarantino"), ("4", "Transformers", "Micheal Bay"),\
-        ("5", "Il signore degli anelli", "Peter Jackson"),("6" ,\
+        ("5", "Il signore degli anelli", "Peter Jackson"), ("6", \
         "Avengers:end game", "Fratelli Russo")]
     CLIENTI = [("CF00000000000001", "Alessandro", "Guidi", "24"), \
         ("CF00000000000002", "Carlo", "Caru", "23"), ("CF00000000000003",\
@@ -76,7 +76,7 @@ def default_values(CURSOR, MYDB):
         MYDB.rollback()
     
     try:
-        CURSOR.executemany(SQL_QUERTY_CL,CLIENTI)
+        CURSOR.executemany(SQL_QUERTY_CL, CLIENTI)
         MYDB.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
@@ -84,7 +84,6 @@ def default_values(CURSOR, MYDB):
 
 
 def select_cinema():
-    
     #Open database connection.
     CONNECTION = mysql.connector.connect(host='localhost', user='root', passwd='root')
 
@@ -110,8 +109,8 @@ def print_biglietto(CF, Cinema, Film):
     SALA = random.randint(1, 10)
     FILA = random.choice(string.ascii_lowercase)
     try:
-        MYDB = mysql.connector.connect(host = "localhost", user = "root",\
-            passwd = "root")
+        MYDB = mysql.connector.connect(host="localhost", user="root",\
+            passwd="root")
         MYCURSOR = MYDB.cursor()
         MYCURSOR.execute("USE Biglietteria_Storico")
         datetimeB = datetime.datetime.now()
