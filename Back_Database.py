@@ -84,3 +84,23 @@ def select_cinema():
     cursor.execute("SELECT * from Cinema")
     return cursor.fetchall()
 
+def print_biglietto(CF, Cinema, Film):
+    posto = random.randint(1,25)
+    sala = random.randint(1,10)
+    fila = random.choice(string.ascii_lowercase)
+    try:
+        mydb = mysql.connector.connect(
+            host = "localhost",
+            user = "root",
+            passwd = "root",
+        )
+        mycursor = mydb.cursor()
+        mycursor.execute("USE Biglietteria_Storico")
+        datetimeB = datetime.datetime.now()
+        mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
+            VALUES('"+posto+"','"+fila+"','"+sala+"','"+datetimeB+"','"+Cinema+"','"+Film+"','"+CF+"')")
+        mydb.commit()
+        print("BIGLIETTO IN STAMPA....")
+        print("Ora è disponibile una nuova operazione")
+    except Error as e:
+        print("Error while connecting to MySQL", e)
