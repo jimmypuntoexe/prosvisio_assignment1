@@ -9,28 +9,28 @@ import string
 
 
 def createDB():
-    mydb = mysql.connector
+    MYDB = mysql.connector
     try:
-        mydb = mysql.connector.connect(
+        MYDB = mysql.connector.connect(
             host = "localhost",
             user = "root",
             passwd = "root",
         )
-        if mydb.is_connected():
-            mycursor = mydb.cursor()
-            mycursor.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
-            mycursor.execute("USE Biglietteria_Storico")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY, Titolo VARCHAR(50),Regista VARCHAR(50))")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT, idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),FOREIGN KEY(CF) REFERENCES Cliente(CF))")
-            default_values(mycursor,mydb)
+        if MYDB.is_connected():
+            MYCURSOR = MYDB.cursor()
+            MYCURSOR.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
+            MYCURSOR.execute("USE Biglietteria_Storico")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY, Titolo VARCHAR(50),Regista VARCHAR(50))")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT, idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),FOREIGN KEY(CF) REFERENCES Cliente(CF))")
+            default_values(MYCURSOR,MYDB)
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
-        if (mydb.is_connected()):
-            mycursor.close()
-            mydb.close()
+        if (MYDB.is_connected()):
+            MYCURSOR.close()
+            MYDB.close()
             print("MySQL connection is closed")
 
 
@@ -38,86 +38,82 @@ def createDB():
 
 
 
-def default_values(cursor,mydb):
-    print("sono dentro a default_values")
-    Cinema = [("1","The Space","Vimercate"),("2","Arcadia","Bellinzago"),("3","The movie","Busnago"),("4","The Space","Torino"),("5","Arcadia","Melzo")]
-    Film = [("1","Armagheddon","Micheal Bay"),("2","Le iene","Tarantino"),("3","Pulp Fiction","Tarantino"),("4","Transformers","Micheal Bay"),
+def default_values(CURSOR,MYDB):
+    CINEMA = [("1","The Space","Vimercate"),("2","Arcadia","Bellinzago"),("3","The movie","Busnago"),("4","The Space","Torino"),("5","Arcadia","Melzo")]
+    FILM = [("1","Armagheddon","Micheal Bay"),("2","Le iene","Tarantino"),("3","Pulp Fiction","Tarantino"),("4","Transformers","Micheal Bay"),
     ("5","Il signore degli anelli","Peter Jackson"),("6","Avengers:end game","Fratelli Russo")]
-    Clienti = [("CF00000000000001","Alessandro","Guidi","24"),("CF00000000000002","Carlo","Caru","23"),("CF00000000000003","Andrea","Carubelli","23"),("CF00000000000004","Leo","Lozio","24"),("CF00000000000005","Gimmy","Baldu","24"),("CF00000000000006","Mario","Bianchi","45")]
+    CLIENTI = [("CF00000000000001","Alessandro","Guidi","24"),("CF00000000000002","Carlo","Caru","23"),("CF00000000000003","Andrea","Carubelli","23"),("CF00000000000004","Leo","Lozio","24"),("CF00000000000005","Gimmy","Baldu","24"),("CF00000000000006","Mario","Bianchi","45")]
     #Biglietto = [("D",15,"CF1",1,1,8,11/10/2019),("D",16,"CF2",1,1,8,11/10/2019),("E",1,"CF3",1,1,8,11/10/2019),("D",15,"CF4",1,2,2,11/10/2019),("E",1,"CF5",1,2,2,11/10/2019),
     #("G",13,"CF4",2,2,6,7/10/2019),("I",2,"CF4",2,2,6,17/10/2019)]
-    sql_query_C= """INSERT INTO Cinema (IdCinema, Nome, Città) VALUES (%s, %s, %s) """
-    sql_query_F= """INSERT INTO Film (IdFilm, Titolo, Regista) VALUES (%s, %s, %s) """
-    sql_query_Cl= """INSERT INTO Cliente (CF, Nome, Cognome, Età) VALUES (%s, %s, %s, %s) """
+    SQL_QUERTY_C= """INSERT INTO Cinema (IdCinema, Nome, Città) VALUES (%s, %s, %s) """
+    SQL_QUERTY_F= """INSERT INTO Film (IdFilm, Titolo, Regista) VALUES (%s, %s, %s) """
+    SQL_QUERTY_CL= """INSERT INTO Cliente (CF, Nome, Cognome, Età) VALUES (%s, %s, %s, %s) """
     #sql_query_B=("""INSERT INTO Biglietto (Posto, Fila, Sala, data, ) VALUES (%d, %s, %s, %d) """)
     try:
-        cursor.executemany(sql_query_C,Cinema)
-        mydb.commit()
-        print("ho inserito i cinema")
+        CURSOR.executemany(SQL_QUERTY_C,CINEMA)
+        MYDB.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        mydb.rollback()
+        MYDB.rollback()
 
     try:
-        cursor.executemany(sql_query_F,Film)
-        mydb.commit()
-        print("ho inserito i film")
+        CURSOR.executemany(SQL_QUERTY_F,FILM)
+        MYDB.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        mydb.rollback()
+        MYDB.rollback()
     
     try:
-        cursor.executemany(sql_query_Cl,Clienti)
-        mydb.commit()
-        print("ho inserito i clienti")
+        CURSOR.executemany(SQL_QUERTY_CL,CLIENTI)
+        MYDB.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        mydb.rollback()
+        MYDB.rollback()
 
 
 def select_cinema():
     
     #Open database connection.
-    connection = mysql.connector.connect(host='localhost', user='root', passwd = 'root')
+    CONNECTION = mysql.connector.connect(host='localhost', user='root', passwd = 'root')
 
     #Prepare a cursor to work with database.
-    cursor = connection.cursor()
+    CURSOR = CONNECTION.cursor()
 
     #We suppose  that the database has been already created.
 
-    cursor.execute("USE Biglietteria_Storico")
+    CURSOR.execute("USE Biglietteria_Storico")
 
-    cursor.execute("SELECT * from Cinema")
-    return cursor.fetchall()
+    CURSOR.execute("SELECT * from Cinema")
+    return CURSOR.fetchall()
 
 def select_film():
-    connection = mysql.connector.connect(host='localhost', user='root', passwd = 'root')
-    cursor = connection.cursor()
-    cursor.execute("USE Biglietteria_Storico")
-    cursor.execute("SELECT * from Film")
-    return cursor.fetchall()
+    CONNECTION = mysql.connector.connect(host='localhost', user='root', passwd = 'root')
+    CURSOR = CONNECTION.cursor()
+    CURSOR.execute("USE Biglietteria_Storico")
+    CURSOR.execute("SELECT * from Film")
+    return CURSOR.fetchall()
 
 def print_biglietto(CF, Cinema, Film):
-    posto = random.randint(1,25)
-    sala = random.randint(1,10)
-    fila = random.choice(string.ascii_lowercase)
+    POSTO = random.randint(1,25)
+    SALA = random.randint(1,10)
+    FILA = random.choice(string.ascii_lowercase)
     try:
-        mydb = mysql.connector.connect(
+        MYDB = mysql.connector.connect(
             host = "localhost",
             user = "root",
             passwd = "root",
         )
-        mycursor = mydb.cursor()
-        mycursor.execute("USE Biglietteria_Storico")
+        MYCURSOR = MYDB.cursor()
+        MYCURSOR.execute("USE Biglietteria_Storico")
         datetimeB = datetime.datetime.now()
-        mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
-            VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetimeB)+"','"+str(Cinema)+"','"+str(Film)+"','"+CF+"')")
-        mydb.commit()
+        MYCURSOR.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
+            VALUES('"+str(POSTO)+"','"+FILA+"','"+str(SALA)+"','"+str(datetimeB)+"','"+str(Cinema)+"','"+str(Film)+"','"+CF+"')")
+        MYDB.commit()
         print("BIGLIETTO IN STAMPA....")
         print(".......................")
         print(".......................")
         print(".......................")
-        print("Own: "+CF+" Cinema: "+str(Cinema)+" Movie: "+str(Film)+" Seat: "+str(posto)+" Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetimeB))
+        print("Own: "+CF+" Cinema: "+str(Cinema)+" Movie: "+str(Film)+" Seat: "+str(POSTO)+" Row: "+FILA+" auditorium: "+str(SALA)+" Date: "+str(datetimeB))
         print(".......................")
         print(".......................")
         print(".......................")
