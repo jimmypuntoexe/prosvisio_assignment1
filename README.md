@@ -37,5 +37,7 @@ The application uses two docker images:
 We exploit the CI/CD tool provide by GitLab for create the pipeline.
 The pipeline have two stages:
   * build: create application's docker and build a runnable instace of application.Then push it in the repository.
-  * verify: analize code for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions. For this purpose we used Pylint.
+  * verify: analize code for programming errors, helps enforcing a coding standard,
+  sniffs for code smells and offers simple refactoring suggestions.
+  For this purpose we used Pylint.
            
