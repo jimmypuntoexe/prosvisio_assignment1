@@ -5,17 +5,16 @@ services:
 
 #Environment variables
 variables:
+    CONTAINER_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi
  #MYSQL_ROOT_PASSWORD: root
  #MYSQL_DATABASE: 
-  CONTAINER_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi
   #CONTAINER_RELEASE_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi:latest
 
 #stages
-  stages:
-   - build
+stages:
+    - build
 
-
-  build:
+build:
     stage: build
     script:
         - echo "Building"
