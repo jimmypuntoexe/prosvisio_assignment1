@@ -6,7 +6,7 @@ import back_database
 import check_functions
 
 #Database initialize
-back_database.createDB()
+back_database.create_db()
 
 #Insert the Fiscal Code to login.
 CFUSER = input("Insert your Fiscal Code to login: ")
