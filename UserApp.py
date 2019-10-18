@@ -21,11 +21,11 @@ if not Check_Functions.check_user(CFUSER):
         print("Thanks to visit us")
         sys.exit()
     #Insert a new Fiscal Code and check it.
-    CF = input("Please insert your Fiscal Code: ")
-    CF_CHECKED = Check_Functions.check_codice_fiscale(CF)
+    CFUSER = input("Please insert your Fiscal Code: ")
+    CF_CHECKED = Check_Functions.check_codice_fiscale(CFUSER)
     while(CF_CHECKED) is False:
-        CF = input("Error: Fiscal code invalid. Please reinsert it: ")
-        CF_CHECKED = Check_Functions.check_codice_fiscale(CF)
+        CFUSER = input("Error: Fiscal code invalid. Please reinsert it: ")
+        CF_CHECKED = Check_Functions.check_codice_fiscale(CFUSER)
 
     #Insert a new Name and check it.
     NAME = input("Please insert your Name: ")
@@ -54,13 +54,13 @@ CINEMA = Back_Database.select_cinema()
 for row in CINEMA:
     print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
         " || ")
-CHOICE = input("You want to go to the cinema n°: ")
+Cinema_Id = input("You want to go to the cinema n°: ")
 
 #Check if the Cinema Id inserted is correct.
-CHOICE_CHECK = Check_Functions.check_number_cinema(int(CHOICE))
+CHOICE_CHECK = Check_Functions.check_number_cinema(int(Cinema_Id))
 while(CHOICE_CHECK) is False:
     CHECK = input("Error: Cinena invalid. Please reinsert it: ")
-    CHOICE_CHECK = Check_Functions.check_number_cinema(int(CHOICE))
+    CHOICE_CHECK = Check_Functions.check_number_cinema(int(Cinema_Id))
 
 print("What movie do you want to see?")
 
@@ -68,33 +68,11 @@ Film = Back_Database.select_film()
 for row in Film:
     print("|| " + str(row[0]) + " || " + str(row[1]) + " || " + str(row[2]) + \
         " || ")
-CHOICE = input("You want to see the film n°: ")
+Film_id = input("You want to see the film n°: ")
 #Check if the Film id is correct.
-CHOICE_CHECK = Check_Functions.check_number_film(int(CHOICE))
+CHOICE_CHECK = Check_Functions.check_number_film(int(Film_id))
 while(CHOICE_CHECK) is False:
     CHECK = input("Error: Film invalid. Please reinsert it: ")
-    CHOICE_CHECK = Check_Functions.check_number_film(int(CHOICE))
-'''
-    while(PLATE_OK) is False:
-        PLATE = input("Error: Plate invalid. Please reinsert it: ")
-        PLATE_OK = database_functions.check_plate(PLATE)
+    CHOICE_CHECK = Check_Functions.check_number_film(int(Film_id))
 
-    PLATE_EXISTING = database_functions.check_plate_existing(PLATE)
-
-END_DATE = input("Please insert the date until you want to rent the car (yyyy-mm-dd): ")
-END_DATE_OK = database_functions.check_end_date(END_DATE)
-
-while(END_DATE_OK) is False:
-    END_DATE = input("Error: date inserted is not valid. Please reinsert it: ")
-    END_DATE_OK = database_functions.check_end_date(END_DATE)
-
-#Add the new rent to database.
-database_functions.add_rent(USER, PLATE, END_DATE)
-
-print("Thank you for having rent a car!")
-'''
-#USER LOGIN
-#LISTA DI AUTO
-#NOLEGGIA UN'AUTO INSERENDO LA TARGA
-#INSERISCI LA DATA DI TERMINE NOLEGGIO
-#NOLEGGIO CONFERMATO! VUOI NOLEGGIARE UN'ALTRA AUTO
+Back_Database.print_biglietto(CFUSER, Cinema_Id, Film_id)

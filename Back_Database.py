@@ -111,9 +111,16 @@ def print_biglietto(CF, Cinema, Film):
         mycursor.execute("USE Biglietteria_Storico")
         datetimeB = datetime.datetime.now()
         mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
-            VALUES('"+posto+"','"+fila+"','"+sala+"','"+datetimeB+"','"+Cinema+"','"+Film+"','"+CF+"')")
+            VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetimeB)+"','"+str(Cinema)+"','"+str(Film)+"','"+CF+"')")
         mydb.commit()
         print("BIGLIETTO IN STAMPA....")
+        print(".......................")
+        print(".......................")
+        print(".......................")
+        print("Own: "+CF+" Cinema: "+str(Cinema)+" Movie: "+str(Film)+" Seat: "+str(posto)+" Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetimeB))
+        print(".......................")
+        print(".......................")
+        print(".......................")
         print("Ora è disponibile una nuova operazione")
     except Error as e:
         print("Error while connecting to MySQL", e)
