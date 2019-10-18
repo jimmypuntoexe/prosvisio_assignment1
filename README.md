@@ -5,6 +5,8 @@
 
 *Guidi Alessandro 808865*
 
+Repository: https://gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi/
+
 ### TARGET
 Target is to set up a CI/CD pipeline to automate the entire development process and use the Gitlab CI/CD infrastructure to implement it
 
@@ -22,3 +24,18 @@ The database is made of four table:
 *  Cliente: contains the information of customer who have buy a tickets(**CF**,Nome,Cognome,Età)
 *  Biglietto: contains tickets information of the chosen show(Posto,Fila,Sala,**DataTime**)
 
+##DevOps
+
+#Container
+We use Docker for the containerization.
+The application uses two docker images:
+ * Application: python 3.7
+ * Database: mysql 5.7
+
+ 
+#Continuous Integration and Continuous Deployment CI/CD
+We exploit the CI/CD tool provide by GitLab for create the pipeline.
+The pipeline have two stages:
+  * build: create application's docker and build a runnable instace of application.Then push it in the repository.
+  * verify: analize code for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions. For this purpose we used Pylint.
+           
