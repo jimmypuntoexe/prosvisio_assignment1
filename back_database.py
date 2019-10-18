@@ -11,24 +11,28 @@ import string
 def createDB():
     MYDB = mysql.connector
     try:
-        MYDB = mysql.connector.connect(
-            host = "localhost",
-            user = "root",
-            passwd = "root",
-        )
+        MYDB = mysql.connector.connect(host = "localhost", \
+            user = "root",passwd = "root")
         if MYDB.is_connected():
             MYCURSOR = MYDB.cursor()
             MYCURSOR.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
             MYCURSOR.execute("USE Biglietteria_Storico")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY, Titolo VARCHAR(50),Regista VARCHAR(50))")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
-            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT, idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),FOREIGN KEY(CF) REFERENCES Cliente(CF))")
-            default_values(MYCURSOR,MYDB)
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
+                 Titolo VARCHAR(50),Regista VARCHAR(50))")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
+                PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
+                 PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
+            MYCURSOR.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
+                Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT,\
+                idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
+                Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
+                FOREIGN KEY(CF) REFERENCES Cliente(CF))")
+            default_values(MYCURSOR, MYDB)
     except Error as e:
         print("Error while connecting to MySQL", e)
     finally:
-        if (MYDB.is_connected()):
+        if(MYDB.is_connected()):
             MYCURSOR.close()
             MYDB.close()
             print("MySQL connection is closed")
@@ -38,11 +42,15 @@ def createDB():
 
 
 
-def default_values(CURSOR,MYDB):
-    CINEMA = [("1","The Space","Vimercate"),("2","Arcadia","Bellinzago"),("3","The movie","Busnago"),("4","The Space","Torino"),("5","Arcadia","Melzo")]
-    FILM = [("1","Armagheddon","Micheal Bay"),("2","Le iene","Tarantino"),("3","Pulp Fiction","Tarantino"),("4","Transformers","Micheal Bay"),
-    ("5","Il signore degli anelli","Peter Jackson"),("6","Avengers:end game","Fratelli Russo")]
-    CLIENTI = [("CF00000000000001","Alessandro","Guidi","24"),("CF00000000000002","Carlo","Caru","23"),("CF00000000000003","Andrea","Carubelli","23"),("CF00000000000004","Leo","Lozio","24"),("CF00000000000005","Gimmy","Baldu","24"),("CF00000000000006","Mario","Bianchi","45")]
+def default_values(CURSOR, MYDB):
+    CINEMA = [("1","The Space","Vimercate"),("2","Arcadia","Bellinzago"),("3","The movie","Busnago"),\
+        ("4","The Space","Torino"),("5","Arcadia","Melzo")]
+    FILM = [("1","Armagheddon","Micheal Bay"),("2","Le iene","Tarantino"),("3","Pulp Fiction","Tarantino"),\
+        ("4","Transformers","Micheal Bay"),("5","Il signore degli anelli","Peter Jackson"),\
+        ("6","Avengers:end game","Fratelli Russo")]
+    CLIENTI = [("CF00000000000001","Alessandro","Guidi","24"),("CF00000000000002","Carlo","Caru","23"),\
+        ("CF00000000000003","Andrea","Carubelli","23"),("CF00000000000004","Leo","Lozio","24"),\
+        ("CF00000000000005","Gimmy","Baldu","24"),("CF00000000000006","Mario","Bianchi","45")]
     #Biglietto = [("D",15,"CF1",1,1,8,11/10/2019),("D",16,"CF2",1,1,8,11/10/2019),("E",1,"CF3",1,1,8,11/10/2019),("D",15,"CF4",1,2,2,11/10/2019),("E",1,"CF5",1,2,2,11/10/2019),
     #("G",13,"CF4",2,2,6,7/10/2019),("I",2,"CF4",2,2,6,17/10/2019)]
     SQL_QUERTY_C= """INSERT INTO Cinema (IdCinema, Nome, Città) VALUES (%s, %s, %s) """
