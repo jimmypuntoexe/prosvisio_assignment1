@@ -5,25 +5,29 @@ services:
 
 #Environment variables
 variables:
-
-  MYSQL_ROOT_PASSWORD: root
- # MYSQL_DATABASE: 
-  CONTAINER_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi
+    CONTAINER_IMAGE: registry.gitlab.com/jimmy.exe/2019_assignment1_balducci_guidi
+ #MYSQL_ROOT_PASSWORD: root
+ #MYSQL_DATABASE: 
   #CONTAINER_RELEASE_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi:latest
 
 #stages
-  stages:
-   - build
-
-
-  build:
+stages:
+    - build
+    - verify
+build:
+    stage: build
     script:
         - echo "Building"
         - echo $CI_JOB_TOKEN
         - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
         - docker build -t $CONTAINER_IMAGE .
         - docker push $CONTAINER_IMAGE
-
-
+verify:
+    stage: verify
+    image: $CONTAINER_IMAGE
+    script:
+        - pylint UserApp.py
+        - pylint Back_Database.py
+        - pylint Check_Functions.py
 
 

@@ -1,5 +1,5 @@
 #use a Python image as our launching point
-FROM python:2.7
+FROM python:3.7
 
 WORKDIR /ticketapp
 
@@ -9,5 +9,6 @@ RUN apt-get update
 
 RUN pip install mysql-connector-python
 
+RUN pip install pylint
 #CMD ["python", "test.py"]
 

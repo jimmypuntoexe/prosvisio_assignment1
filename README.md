@@ -12,7 +12,7 @@ Target is to set up a CI/CD pipeline to automate the entire development process 
 ### APPLICATION
 The application manages the sale of cinema tickets, through a database of several cinema in the area.
 
-In this mode,it's possibile reserve tickets for cinema to watch your favorite film.
+In this way,it's possibile reserve tickets for cinema to watch your favorite film.
 
 For the database,we used MySql,instead the application is was written using *Python*,  which used his library *mysql.connector* as interface.  
 
