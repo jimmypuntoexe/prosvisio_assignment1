@@ -24,16 +24,16 @@ The database is made of four table:
 *  Cliente: contains the information of customer who have buy a tickets(**CF**,Nome,Cognome,Età)
 *  Biglietto: contains tickets information of the chosen show(Posto,Fila,Sala,**DataTime**)
 
-##DevOps
+## DevOps
 
-#Container
+# Container
 We use Docker for the containerization.
 The application uses two docker images:
  * Application: python 3.7
  * Database: mysql 5.7
 
  
-#Continuous Integration and Continuous Deployment CI/CD
+# Continuous Integration and Continuous Deployment CI/CD
 We exploit the CI/CD tool provide by GitLab for create the pipeline.
 The pipeline have two stages:
   * build: create application's docker and build a runnable instace of application.Then push it in the repository.
