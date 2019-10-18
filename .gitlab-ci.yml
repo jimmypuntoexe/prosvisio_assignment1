@@ -24,7 +24,7 @@ build:
         - docker push $CONTAINER_IMAGE
 verify:
     stage: verify
-    image: CONTAINER_IMAGE
+    image: $CONTAINER_IMAGE
     script:
         - pylint UserApp.py
         - pylint Back_Database.py
