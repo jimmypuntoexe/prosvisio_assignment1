@@ -1,4 +1,6 @@
  #!/usr/bin/env python
+'''Main function '''
+
 import sys
 import back_database
 import check_functions
