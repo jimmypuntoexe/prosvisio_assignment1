@@ -13,7 +13,7 @@ variables:
 #stages
 stages:
     - build
-
+    - verify
 build:
     stage: build
     script:
@@ -22,7 +22,12 @@ build:
         - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
         - docker build -t $CONTAINER_IMAGE .
         - docker push $CONTAINER_IMAGE
-
-
+verify:
+    stage: verify
+    image: CONTAINER_IMAGE
+    script:
+        - pylint UserApp.py
+        - pylint Back_Database.py
+        - pylint Check_Functions.py
 
 
