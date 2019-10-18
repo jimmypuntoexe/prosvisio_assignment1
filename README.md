@@ -19,6 +19,6 @@ For the database,we used MySql,instead the application is was written using *Pyt
 The database is made of four table:
 *  Cinema: contains the information related to cinema(**Id**,Nome,Città)
 *  Film: contains the movie information that you can see(**Id**,Titolo,Regista)
-*  Clienti: contains the information of customer who have buy a tickets(**CF**,Nome,Cognome,Età)
+*  Cliente: contains the information of customer who have buy a tickets(**CF**,Nome,Cognome,Età)
 *  Biglietto: contains tickets information of the chosen show(Posto,Fila,Sala,**DataTime**)
 
