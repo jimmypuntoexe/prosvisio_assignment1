@@ -14,6 +14,7 @@ variables:
 stages:
     - build
     - verify
+    - test-unit
 build:
     stage: build
     script:
@@ -29,5 +30,9 @@ verify:
         - pylint userapp.py
         - pylint back_database.py
         - pylint check_functions.py
-
+test-unit:
+    stage: test-unit
+    image: $CONTAINER_IMAGE
+    script:
+        -python ./test.py
 
