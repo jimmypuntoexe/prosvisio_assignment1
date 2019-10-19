@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 '''manage database'''
-import mysql.connector
-from mysql.connector import Error
-import sqlite3
 import datetime
 import random
 import string
+import mysql.connector
+from mysql.connector import Error
 
 '''create database'''
 
@@ -30,8 +29,8 @@ def create_db():
                 Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
                 FOREIGN KEY(CF) REFERENCES Cliente(CF))")
             default_values(mycursor, MYDB)
-    except Error as e:
-        print("Error while connecting to MySQL", e)
+    except Error as err:
+        print("Error while connecting to MySQL", err)
     finally:
         if mydb.is_connected():
             mycursor.close()
@@ -41,91 +40,96 @@ def create_db():
 
 
 
+'''Insert default values into database'''
 
-
-def default_values(CURSOR, MYDB):
-    CINEMA = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
+def default_values(cursor, mydb):
+    cinema = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
         ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
         ("5", "Arcadia", "Melzo")]
-    FILM = [("1", "Armagheddon", "Micheal Bay"), ("2", "Le iene", "Tarantino"),\
+    film = [("1", "Armagheddon", "Micheal Bay"), ("2", "Le iene", "Tarantino"),\
         ("3", "Pulp Fiction", "Tarantino"), ("4", "Transformers", "Micheal Bay"),\
         ("5", "Il signore degli anelli", "Peter Jackson"), ("6", \
         "Avengers:end game", "Fratelli Russo")]
-    CLIENTI = [("CF00000000000001", "Alessandro", "Guidi", "24"), \
+    clienti = [("CF00000000000001", "Alessandro", "Guidi", "24"), \
         ("CF00000000000002", "Carlo", "Caru", "23"), ("CF00000000000003",\
         "Andrea", "Carubelli", "23"), ("CF00000000000004", "Leo", "Lozio",\
         "24"), ("CF00000000000005", "Gimmy", "Baldu", "24"),\
         ("CF00000000000006", "Mario", "Bianchi", "45")]
-    SQL_QUERTY_C = """INSERT INTO Cinema (IdCinema, Nome, Città) \
+    sql_querty_c = """INSERT INTO Cinema (IdCinema, Nome, Città) \
         VALUES (%s, %s, %s) """
-    SQL_QUERTY_F = """INSERT INTO Film (IdFilm, Titolo, Regista) \
+    sql_querty_f = """INSERT INTO Film (IdFilm, Titolo, Regista) \
         VALUES (%s, %s, %s) """
-    SQL_QUERTY_CL = """INSERT INTO Cliente (CF, Nome, Cognome, Età) \
+    sql_querty_cl = """INSERT INTO Cliente (CF, Nome, Cognome, Età) \
         VALUES (%s, %s, %s, %s) """
     try:
-        CURSOR.executemany(SQL_QUERTY_C, CINEMA)
-        MYDB.commit()
+        cursor.executemany(sql_querty_c, cinema)
+        mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        MYDB.rollback()
+        mydb.rollback()
     try:
-        CURSOR.executemany(SQL_QUERTY_F, FILM)
-        MYDB.commit()
+        cursor.executemany(sql_querty_f, film)
+        mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        MYDB.rollback()    
+        mydb.rollback()
     try:
-        CURSOR.executemany(SQL_QUERTY_CL, CLIENTI)
-        MYDB.commit()
+        cursor.executemany(sql_querty_cl, clienti)
+        mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
-        MYDB.rollback()
+        mydb.rollback()
 
+'''return all instance of cinema table'''
 
 def select_cinema():
     #Open database connection.
-    CONNECTION = mysql.connector.connect(host='localhost', user='root', passwd='root')
+    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
 
     #Prepare a cursor to work with database.
-    CURSOR = CONNECTION.cursor()
+    cursor = connection.cursor()
 
     #We suppose  that the database has been already created.
 
-    CURSOR.execute("USE Biglietteria_Storico")
+    cursor.execute("USE Biglietteria_Storico")
 
-    CURSOR.execute("SELECT * from Cinema")
-    return CURSOR.fetchall()
+    cursor.execute("SELECT * from Cinema")
+    return cursor.fetchall()
+
+'''return all instance of film table'''
 
 def select_film():
-    CONNECTION = mysql.connector.connect(host='localhost', user='root', passwd='root')
-    CURSOR = CONNECTION.cursor()
-    CURSOR.execute("USE Biglietteria_Storico")
-    CURSOR.execute("SELECT * from Film")
-    return CURSOR.fetchall()
+    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
+    cursor = connection.cursor()
+    cursor.execute("USE Biglietteria_Storico")
+    cursor.execute("SELECT * from Film")
+    return cursor.fetchall()
 
-def print_biglietto(CF, Cinema, Film):
-    POSTO = random.randint(1, 25)
-    SALA = random.randint(1, 10)
-    FILA = random.choice(string.ascii_lowercase)
+'''Create ticket'''
+
+def print_biglietto(cf, cinema, film):
+    posto = random.randint(1, 25)
+    sala = random.randint(1, 10)
+    fila = random.choice(string.ascii_lowercase)
     try:
-        MYDB = mysql.connector.connect(host="localhost", user="root",\
+        mydb = mysql.connector.connect(host="localhost", user="root",\
             passwd="root")
-        MYCURSOR = MYDB.cursor()
-        MYCURSOR.execute("USE Biglietteria_Storico")
-        datetimeB = datetime.datetime.now()
-        MYCURSOR.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
-            VALUES('"+str(POSTO)+"','"+FILA+"','"+str(SALA)+"','"+str(datetimeB)+"','"+str(Cinema)+\
-            "','"+str(Film)+"','"+CF+"')")
-        MYDB.commit()
+        mycursor = mydb.cursor()
+        mycursor.execute("USE Biglietteria_Storico")
+        datetime_b = datetime.datetime.now()
+        mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
+            VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','"+str(cinema)+\
+            "','"+str(film)+"','"+cf+"')")
+        mydb.commit()
         print("BIGLIETTO IN STAMPA....")
         print(".......................")
         print(".......................")
         print(".......................")
-        print("Own: "+CF+" Cinema: "+str(Cinema)+" Movie: "+str(Film)+" Seat: "+str(POSTO)+\
-            " Row: "+FILA+" auditorium: "+str(SALA)+" Date: "+str(datetimeB))
+        print("Own: "+cf+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+\
+            " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b))
         print(".......................")
         print(".......................")
         print(".......................")
         print("Ora è disponibile una nuova operazione")
-    except Error as e:
-        print("Error while connecting to MySQL", e)
+    except Error as err:
+        print("Error while connecting to MySQL", err)
