@@ -1,14 +1,13 @@
 #!/usr/bin/python3
 '''manage database'''
- #!/usr/bin/env python
 import datetime
 import random
 import string
 import mysql.connector
 from mysql.connector import Error
 
-'''create database'''
 def create_db():
+    '''create database'''
     try:
         mydb = mysql.connector.connect(host="localhost", \
             user="root", passwd="root")
@@ -36,8 +35,9 @@ def create_db():
             mydb.close()
             print("MySQL connection is closed")
 
-'''Insert default values into database'''
+
 def default_values(cursor, mydb):
+    '''Insert default values into database'''
     cinema = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
         ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
         ("5", "Arcadia", "Melzo")]
@@ -75,24 +75,24 @@ def default_values(cursor, mydb):
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
 
-'''return all instance of cinema table'''
 def select_cinema():
+    '''return all instance of cinema table'''
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
     cursor = connection.cursor()
     cursor.execute("USE Biglietteria_Storico")
     cursor.execute("SELECT * from Cinema")
     return cursor.fetchall()
 
-'''return all instance of film table'''
 def select_film():
+    '''return all instance of film table'''
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
     cursor = connection.cursor()
     cursor.execute("USE Biglietteria_Storico")
     cursor.execute("SELECT * from Film")
     return cursor.fetchall()
 
-'''Create ticket'''
-def print_biglietto(cf, cinema, film):
+def print_biglietto(cf_cl, cinema, film):
+    '''Create ticket'''
     posto = random.randint(1, 25)
     sala = random.randint(1, 10)
     fila = random.choice(string.ascii_lowercase)
@@ -104,13 +104,13 @@ def print_biglietto(cf, cinema, film):
         datetime_b = datetime.datetime.now()
         mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
             VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
-            +str(cinema)+"','"+str(film)+"','"+cf+"')")
+            +str(cinema)+"','"+str(film)+"','"+cf_cl+"')")
         mydb.commit()
         print("BIGLIETTO IN STAMPA....")
         print(".......................")
         print(".......................")
         print(".......................")
-        print("Own: "+cf+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+\
+        print("Own: "+cf_cl+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+\
             " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b))
         print(".......................")
         print(".......................")
