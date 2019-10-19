@@ -29,9 +29,9 @@ def check_nome(nome):
     if not nome:
         return False
     for char in nome:
-        if (not(char >= 'a' and char <= 'z') \
-            and not (char >= 'A' and char <= 'Z') \
-            and not char == ' '):
+        if ((char <= 'a' or char >= 'z') \
+            and (char <= 'A' or char >= 'Z') \
+            and char != ' '):
             return False
 
     return True
@@ -42,9 +42,9 @@ def check_cognome(cognome):
         return False
 
     for char in cognome:
-        if (not (char >= 'a' and char <= 'z') \
-            and not (char >= 'A' and char <= 'Z') \
-            and not char == ' '):
+        if ((char <= 'a' or char >= 'z') \
+            and (char <= 'A' or char >= 'Z') \
+            and char != ' '):
             return False
 
     return True
