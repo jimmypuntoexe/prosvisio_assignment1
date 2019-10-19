@@ -10,5 +10,5 @@ RUN apt-get update
 RUN pip install mysql-connector-python
 
 RUN pip install pylint
-#CMD ["python", "test.py"]
 
+CMD ["python", "test.py"]
