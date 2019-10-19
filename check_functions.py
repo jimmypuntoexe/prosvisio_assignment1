@@ -28,7 +28,7 @@ def check_nome(nome):
     """Check if a name is valid"""
     if not nome:
         return False
-    for i in range(0, len(nome)):
+    for i in range(len(nome)):
         if (not(nome[i] >= 'a' and nome[i] <= 'z') \
             and not (nome[i] >= 'A' and nome[i] <= 'Z') \
             and not nome[i] == ' '):
@@ -41,7 +41,7 @@ def check_cognome(cognome):
     if not cognome:
         return False
 
-    for i in range(0, len(cognome)):
+    for i in range(len(cognome)):
         if (not (cognome[i] >= 'a' and cognome[i] <= 'z') \
             and not (cognome[i] >= 'A' and cognome[i] <= 'Z') \
             and not cognome[i] == ' '):
