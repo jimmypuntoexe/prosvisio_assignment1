@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 '''manage database'''
+ #!/usr/bin/env python
 import datetime
 import random
 import string
@@ -7,9 +8,7 @@ import mysql.connector
 from mysql.connector import Error
 
 '''create database'''
-
 def create_db():
-    MYDB = mysql.connector
     try:
         mydb = mysql.connector.connect(host="localhost", \
             user="root", passwd="root")
@@ -28,7 +27,7 @@ def create_db():
                 idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
                 Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
                 FOREIGN KEY(CF) REFERENCES Cliente(CF))")
-            default_values(mycursor, MYDB)
+            default_values(mycursor, mydb)
     except Error as err:
         print("Error while connecting to MySQL", err)
     finally:
@@ -37,11 +36,7 @@ def create_db():
             mydb.close()
             print("MySQL connection is closed")
 
-
-
-
 '''Insert default values into database'''
-
 def default_values(cursor, mydb):
     cinema = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
         ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
@@ -81,23 +76,14 @@ def default_values(cursor, mydb):
         mydb.rollback()
 
 '''return all instance of cinema table'''
-
 def select_cinema():
-    #Open database connection.
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
-
-    #Prepare a cursor to work with database.
     cursor = connection.cursor()
-
-    #We suppose  that the database has been already created.
-
     cursor.execute("USE Biglietteria_Storico")
-
     cursor.execute("SELECT * from Cinema")
     return cursor.fetchall()
 
 '''return all instance of film table'''
-
 def select_film():
     connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
     cursor = connection.cursor()
@@ -106,7 +92,6 @@ def select_film():
     return cursor.fetchall()
 
 '''Create ticket'''
-
 def print_biglietto(cf, cinema, film):
     posto = random.randint(1, 25)
     sala = random.randint(1, 10)
@@ -118,8 +103,8 @@ def print_biglietto(cf, cinema, film):
         mycursor.execute("USE Biglietteria_Storico")
         datetime_b = datetime.datetime.now()
         mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
-            VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','"+str(cinema)+\
-            "','"+str(film)+"','"+cf+"')")
+            VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
+            +str(cinema)+"','"+str(film)+"','"+cf+"')")
         mydb.commit()
         print("BIGLIETTO IN STAMPA....")
         print(".......................")
