@@ -24,7 +24,7 @@ def create_db():
             mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
                 Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT,\
                 idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
-                Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
+                Cinema(self.assertTrue(check_functions.check_user('CF00000000000001'),msg=None)idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
                 FOREIGN KEY(CF) REFERENCES Cliente(CF))")
             default_values(mycursor, mydb)
     except Error as err:
