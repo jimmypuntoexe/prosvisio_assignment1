@@ -1,8 +1,7 @@
+ #!/usr/bin/env python
+'''check if parameter are correct'''
 import mysql.connector
 from mysql.connector import Error
-import sqlite3
-#import datetime
-
 
 def check_user(user):
     """Check if a client is already insert into database"""
@@ -26,13 +25,10 @@ def check_user(user):
 
     return check
 
-
-    #Check if Name is valid.
 def check_nome(nome):
     """Check if a name is valid"""
     if not nome:
         return False
-
     for i in range(0, len(nome)):
         if (not(nome[i] >= 'a' and nome[i] <= 'z') \
             and not (nome[i] >= 'A' and nome[i] <= 'Z') \
@@ -41,8 +37,6 @@ def check_nome(nome):
 
     return True
 
-
-#Check if Surname is valid.
 def check_cognome(cognome):
     """Check if a surname is valid"""
     if not cognome:
@@ -57,33 +51,30 @@ def check_cognome(cognome):
     return True
 
 
-
 def check_eta(age):
+    '''check if age is valid'''
     check = True
-    if (age < 10 or age > 130) :
+    if (age < 10 or age > 130):
         check = False
     return check
 
-
-#check if fiscal code is valid
 def check_codice_fiscale(code):
     """Check if a fiscal code is valid"""
     check = True
-    if (len(code) != 16) :
+    if len(code) != 16:
         check = False
     return check
 
-
-#check if the choice of cinema is correct
-def check_number_cinema(cinema) :
+def check_number_cinema(cinema):
+    '''check if the choice of cinema is correct'''
     check = True 
-    if (cinema < 1 or cinema > 5 ) :
+    if (cinema < 1 or cinema > 5):
         check = False
     return check
 
-#check if the choice of film is correct
-def check_number_film(film) :
+def check_number_film(film):
+    '''check if the choice of film is correct'''
     check = True 
-    if (film < 1 or film > 6) :
+    if (film < 1 or film > 6):
         check = False
     return check
