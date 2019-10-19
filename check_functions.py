@@ -1,7 +1,6 @@
  #!/usr/bin/env python
 '''check if parameter are correct'''
 import mysql.connector
-from mysql.connector import Error
 
 def check_user(user):
     """Check if a client is already insert into database"""
@@ -67,14 +66,14 @@ def check_codice_fiscale(code):
 
 def check_number_cinema(cinema):
     '''check if the choice of cinema is correct'''
-    check = True 
+    check = True
     if (cinema < 1 or cinema > 5):
         check = False
     return check
 
 def check_number_film(film):
     '''check if the choice of film is correct'''
-    check = True 
+    check = True
     if (film < 1 or film > 6):
         check = False
     return check
