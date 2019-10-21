@@ -34,8 +34,8 @@ test-unit:
     stage: test-unit
     entrypoint:
         - '/usr/bin/env'
-    #image: $CONTAINER_IMAGE
-    #services: 
+    image: $CONTAINER_IMAGE
+    services: 
     #    - MySql:5.7
     script:
         -python ./test.py
