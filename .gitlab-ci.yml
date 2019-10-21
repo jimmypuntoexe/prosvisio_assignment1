@@ -32,11 +32,9 @@ verify:
         - pylint check_functions.py
 test-unit:
     stage: test-unit
-    image: 
-        name:$CONTAINER_IMAGE
-        entrypoint:'/usr/bin/env'
-    services: 
+    image:$CONTAINER_IMAGE
+    #services: 
     #    - MySql:5.7
     script:
-        -python ./test.py
+        -python test.py
 
