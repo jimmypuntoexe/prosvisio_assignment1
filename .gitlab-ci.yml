@@ -36,5 +36,5 @@ test-unit:
     #services: 
     #    - MySql:5.7
     script:
-        -python test.py
+        - python test.py
 
