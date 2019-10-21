@@ -32,7 +32,7 @@ verify:
         - pylint check_functions.py
 test-unit:
     stage: test-unit
-    image:$CONTAINER_IMAGE
+    image: $CONTAINER_IMAGE
     #services: 
     #    - MySql:5.7
     script:
