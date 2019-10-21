@@ -5,6 +5,8 @@ WORKDIR /ticketapp
 
 COPY . /
 
+ADD ./test.py
+
 RUN apt-get update
 
 RUN pip install mysql-connector-python
