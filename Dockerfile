@@ -1,5 +1,5 @@
 #use a Python image as our launching point
-FROM python:3.7
+FROM python:3
 
 WORKDIR /ticketapp
 
