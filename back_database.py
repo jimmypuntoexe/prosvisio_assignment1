@@ -9,7 +9,7 @@ from mysql.connector import Error
 def create_db():
     '''create database'''
     try:
-        mydb = mysql.connector.connect(host="localhost", 
+        mydb = mysql.connector.connect(host="localhost", \
             user="root", passwd="root")
         if mydb.is_connected():
             mycursor = mydb.cursor()
