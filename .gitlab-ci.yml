@@ -33,8 +33,8 @@ verify:
 test-unit:
     stage: test-unit
     image: $CONTAINER_IMAGE
-    #services: 
-    #    - MySql:5.7
+    services: 
+        - MySql:5.7
     script:
         - python test.py
 
