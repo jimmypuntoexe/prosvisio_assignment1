@@ -53,6 +53,6 @@ release:
         - echo "Realese"
         - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
         - docker pull $CONTAINER_IMAGE
-        - docker build $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
+        - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
         - docker push $CONTAINER_RELEASE_IMAGE
 
