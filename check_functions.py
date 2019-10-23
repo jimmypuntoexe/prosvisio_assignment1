@@ -29,8 +29,8 @@ def check_nome(nome):
     if not nome:
         return False
     for char in nome:
-        if (not((char >= 'a' and char <= 'z') \
-            or (char >= 'A' and char <= 'Z'))):
+        if not (char >= 'a' and char <= 'z') \
+            or (char >= 'A' and char <= 'Z'):
             return False
 
     return True
@@ -41,8 +41,8 @@ def check_cognome(cognome):
         return False
 
     for char in cognome:
-        if (not((char >= 'a' and char <= 'z') \
-            or (char >= 'A' and char <= 'Z'))):
+        if not (char >= 'a' and char <= 'z') \
+            or (char >= 'A' and char <= 'Z'):
             return False
 
     return True
@@ -51,7 +51,7 @@ def check_cognome(cognome):
 def check_eta(age):
     '''check if age is valid'''
     check = True
-    if (age < 10 or age > 130):
+    if age < 10 or age > 130:
         check = False
     return check
 
@@ -65,13 +65,13 @@ def check_codice_fiscale(code):
 def check_number_cinema(cinema):
     '''check if the choice of cinema is correct'''
     check = True
-    if (cinema < 1 or cinema > 5):
+    if cinema < 1 or cinema > 5:
         check = False
     return check
 
 def check_number_film(film):
     '''check if the choice of film is correct'''
     check = True
-    if (film < 1 or film > 6):
+    if film < 1 or film > 6:
         check = False
     return check
