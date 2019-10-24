@@ -5,10 +5,10 @@ services:
 
 #Environment variables
 variables:
-    CONTAINER_IMAGE: registry.gitlab.com/jiimmy.exe/2019_assignment1_balducci_guidi
+    CONTAINER_IMAGE: registry.gitlab.com/jimmy.exe/2019_assignment1_balducci_guidi
  #MYSQL_ROOT_PASSWORD: root
  #MYSQL_DATABASE: 
-    CONTAINER_RELEASE_IMAGE: registry.gitlab.com/jiimmy.exe/2019_assignment1_balducci_guidi:latest
+    CONTAINER_RELEASE_IMAGE: registry.gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi:latest
 
 #stages
 stages:
