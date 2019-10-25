@@ -5,7 +5,7 @@
 
 *Guidi Alessandro 808865*
 
-Repository: https://gitlab.com/Jimmy.exe/2019_assignment1_balducci_guidi/
+Repository: https://gitlab.com/jiimmy.exe/2019_assignment1_balducci_guidi/
 
 ### TARGET
 Target is to set up a CI/CD pipeline to automate the entire development process and use the Gitlab CI/CD infrastructure to implement it
@@ -40,4 +40,9 @@ The pipeline have two stages:
   * verify: analize code for programming errors, helps enforcing a coding standard,
   sniffs for code smells and offers simple refactoring suggestions.
   For this purpose we used Pylint.
+  * test-unit: in this stage we test the application using the library "unittest" imported in the script "test.py"
+  * release: Create a tag target-image that refers to source_image that is the latest and upload the repository
+            
+
+
            
