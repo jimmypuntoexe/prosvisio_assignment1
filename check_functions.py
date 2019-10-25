@@ -28,9 +28,10 @@ def check_nome(nome):
     """Check if a name is valid"""
     if not nome:
         return False
+        
     for char in nome:
         if not ((char >= 'a' and char <= 'z') \
-            or (char > 'A' and char <= 'Z')):
+            or (char >= 'A' and char <= 'Z')):
             return False
 
     return True
@@ -38,11 +39,12 @@ def check_nome(nome):
 def check_cognome(cognome):
     """Check if a surname is valid"""
     if not cognome:
+        print("Stringa vuota")
         return False
 
     for char in cognome:
         if not ((char >= 'a' and char <= 'z') \
-            or (char > 'A' and char <= 'Z')):
+            or (char >= 'A' and char <= 'Z')):
             return False
 
     return True
