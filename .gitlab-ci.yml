@@ -60,6 +60,7 @@ release:
 
 deploy:
     stage: deploy
+    image: ruby:latest
     script:
         - apk update && apk add git
         - apt-get update -qy
