@@ -8,6 +8,7 @@ WORKDIR /ticketapp
 RUN apt-get update
 
 RUN pip install mysql-connector-python
+RUN apt-get install python3-mysql.connector
 COPY requirements.txt /tmp
 WORKDIR /tmp
 
