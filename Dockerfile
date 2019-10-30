@@ -3,12 +3,15 @@ FROM python:3
 
 WORKDIR /ticketapp
 
-COPY . /
+
 
 RUN apt-get update
 
 #RUN pip install mysql-connector-python
+
 RUN pip install -r ticketapp/requirements.txt
 RUN pip install pylint
+
+COPY . /
 
 CMD ["python", "test.py"]
