@@ -12,7 +12,6 @@ COPY requirements.txt /tmp
 WORKDIR /tmp
 
 RUN pip install -r requirements.txt
-RUN pip install -r requirements.txt
 RUN pip install pylint
 
 COPY . /
