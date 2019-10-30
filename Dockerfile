@@ -8,7 +8,10 @@ WORKDIR /ticketapp
 RUN apt-get update
 
 #RUN pip install mysql-connector-python
+COPY requirements.txt /tmp
+WORKDIR /tmp
 
+RUN pip install -r requirements.txt
 RUN pip install -r requirements.txt
 RUN pip install pylint
 
