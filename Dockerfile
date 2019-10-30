@@ -7,11 +7,11 @@ WORKDIR /ticketapp
 
 
 
-COPY requirements.txt /tmp
-WORKDIR /tmp
+#COPY requirements.txt /tmp
+#WORKDIR /tmp
 RUN apt-get update
 RUN pip install mysql-connector-python
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
 RUN pip install pylint
 
 COPY . /
