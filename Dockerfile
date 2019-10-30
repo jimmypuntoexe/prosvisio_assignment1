@@ -9,7 +9,7 @@ RUN apt-get update
 
 #RUN pip install mysql-connector-python
 
-RUN pip install -r ticketapp/requirements.txt
+RUN pip install -r requirements.txt
 RUN pip install pylint
 
 COPY . /
