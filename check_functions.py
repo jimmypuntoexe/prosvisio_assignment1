@@ -1,22 +1,13 @@
  #!/usr/bin/env python
 '''check if parameter are correct'''
-import mysql.connector
+import sqlite3
 
 def check_user(user):
     """Check if a client is already insert into database"""
     #Open database connection.
-    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
-
-    #Prepare a cursor to work with database.
-    cursor = connection.cursor()
-
-    #We suppose  that the database has been already created.
-    cursor.execute("USE Biglietteria_Storico;")
-
-    cursor.execute("SELECT CF FROM Cliente")
-    users = cursor.fetchall()
+    connection = sqlite3.connect('ticketapp.db')
+    users=connection.execute("SELECT CF FROM Cliente")
     check = False
-
     #Check if  user Fiscal Code is already in the database.
     for row in users:
         if row[0] == user:
