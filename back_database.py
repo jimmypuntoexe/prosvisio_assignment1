@@ -31,9 +31,9 @@ def create_db():
 
 def default_values(mydb):
     '''Insert default values into database'''
-    cinema = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
-        ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
-        ("5", "Arcadia", "Melzo")]
+    cinema = [('1', 'The Space', 'Vimercate'), ('2', 'Arcadia', 'Bellinzago'),\
+        ('3', 'The movie', 'Busnago'), ('4', 'The Space', 'Torino'),\
+        ('5', 'Arcadia', 'Melzo')]
     film = [("1", "Armagheddon", "Micheal Bay"), ("2", "Le iene", "Tarantino"),\
         ("3", "Pulp Fiction", "Tarantino"), ("4", "Transformers", "Micheal Bay"),\
         ("5", "Il signore degli anelli", "Peter Jackson"), ("6", \
@@ -44,28 +44,28 @@ def default_values(mydb):
         "24"), ("CF00000000000005", "Gimmy", "Baldu", "24"),\
         ("CF00000000000006", "Mario", "Bianchi", "45")]
     sql_querty_c = """INSERT INTO Cinema (IdCinema, Nome, Città) \
-        VALUES (%s, %s, %s) """
+        VALUES(%s, %s, %s) """
     sql_querty_f = """INSERT INTO Film (IdFilm, Titolo, Regista) \
-        VALUES (%s, %s, %s) """
+        VALUES(%s, %s, %s) """
     sql_querty_cl = """INSERT INTO Cliente (CF, Nome, Cognome, Età) \
-        VALUES (%s, %s, %s, %s) """
+        VALUES(%s, %s, %s, %s) """
     try:
         mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
     except Error as error:
-        print("Failed to insert record into MySQL table {}".format(error))
+        print("Failed to insert record into table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_f, film)
         mydb.commit()
     except Error as error:
-        print("Failed to insert record into MySQL table {}".format(error))
+        print("Failed to insert record into table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_cl, clienti)
         mydb.commit()
     except Error as error:
-        print("Failed to insert record into MySQL table {}".format(error))
+        print("Failed to insert record into table {}".format(error))
         mydb.rollback()
 
 def select_cinema():
