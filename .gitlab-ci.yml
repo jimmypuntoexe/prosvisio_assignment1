@@ -12,20 +12,20 @@ variables:
 
 #stages
 stages:
-    - build
+    #- build
     - verify
-    - test-unit
-    - release
+    #- test-unit
+    #- release
     - deploy
-    
-build:
-    stage: build
-    script:
-        - echo "Building"
-        - echo $CI_JOB_TOKEN
-        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-        - docker build -t $CONTAINER_IMAGE .
-        - docker push $CONTAINER_IMAGE
+
+#build:
+ #   stage: build
+  #  script:
+   #     - echo "Building"
+     #   - echo $CI_JOB_TOKEN
+      #  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+       # - docker build -t $CONTAINER_IMAGE .
+        #- docker push $CONTAINER_IMAGE
 verify:
     stage: verify
     image: $CONTAINER_IMAGE
@@ -37,26 +37,25 @@ verify:
     
     
     
-test-unit:
-    stage: test-unit
-    image: $CONTAINER_IMAGE
-    services: 
-        - MySql:5.7
-    script:
-        - echo "Unit-test"
-        - python test.py
-        
-        
+#test-unit:
+ #   stage: test-unit
+   # image: $CONTAINER_IMAGE
+    #services: 
+     #   - MySql:5.7
+    #script:
+     #   - echo "Unit-test"
+      #  - python test.py
+       
         
 
-release:
-    stage: release
-    script:
-        - echo "Realese"
-        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-        - docker pull $CONTAINER_IMAGE
-        - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
-        - docker push $CONTAINER_RELEASE_IMAGE
+#release:
+ #   stage: release
+  #  script:
+   #     - echo "Realese"
+    #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+     #   - docker pull $CONTAINER_IMAGE
+      #  - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
+       # - docker push $CONTAINER_RELEASE_IMAGE
 
 
 deploy:
