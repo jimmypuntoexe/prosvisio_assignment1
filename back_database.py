@@ -44,12 +44,12 @@ def default_values(mydb):
         VALUES(%s, %s, %s)"
     sql_querty_f = """INSERT INTO Film (IdFilm, Titolo, Regista) \
         VALUES(%s, %s, %s) """
-    sql_querty_cl = """INSERT INTO Cliente (CF, Nome, Cognome, Età) \
-        VALUES(%s, %s, %s, %s) """
     try:
         cinema = [('1', 'The Space', 'Vimercate'), ('2', 'Arcadia', 'Bellinzago'),\
         ('3', 'The movie', 'Busnago'), ('4', 'The Space', 'Torino'),\
         ('5', 'Arcadia', 'Melzo')]
+        sql_querty_cl = "INSERT INTO Cliente (CF, Nome, Cognome, Età) \
+        VALUES(%s, %s, %s, %s) "
         mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
     except Error as error:
