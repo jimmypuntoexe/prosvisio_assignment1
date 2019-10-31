@@ -3,30 +3,25 @@
 import datetime
 import random
 import string
-import mysql.connector
-from mysql.connector import Error
+import sqlite3 
+from sqlite3 import Error
 
 def create_db():
     '''create database'''
     try:
-        mydb = mysql.connector.connect(host="localhost", \
-            user="root", passwd="root")
-        if mydb.is_connected():
-            mycursor = mydb.cursor()
-            mycursor.execute("CREATE DATABASE IF NOT EXISTS Biglietteria_Storico")
-            mycursor.execute("USE Biglietteria_Storico")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
+        mydb = sqlite3.connect('ticketapp.db')
+        mydb.execute("CREATE TABLE IF NOT EXISTS Film (idFilm INT PRIMARY KEY,\
                  Titolo VARCHAR(50),Regista VARCHAR(50))")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
+        mydb.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
                 PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
+        mydb.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
                  PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
-            mycursor.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
+        mydb.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
                 Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT,\
                 idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
                 Cinema(idCinema), FOREIGN KEY(idFilm) REFERENCES Film(idFilm),\
                 FOREIGN KEY(CF) REFERENCES Cliente(CF))")
-            default_values(mycursor, mydb)
+        default_values(mydb)
     except Error as err:
         print("Error while connecting to MySQL", err)
     finally:
@@ -36,7 +31,7 @@ def create_db():
             print("MySQL connection is closed")
 
 
-def default_values(cursor, mydb):
+def default_values(mydb):
     '''Insert default values into database'''
     cinema = [("1", "The Space", "Vimercate"), ("2", "Arcadia", "Bellinzago"),\
         ("3", "The movie", "Busnago"), ("4", "The Space", "Torino"),\
@@ -57,19 +52,19 @@ def default_values(cursor, mydb):
     sql_querty_cl = """INSERT INTO Cliente (CF, Nome, Cognome, Età) \
         VALUES (%s, %s, %s, %s) """
     try:
-        cursor.executemany(sql_querty_c, cinema)
+        mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
     try:
-        cursor.executemany(sql_querty_f, film)
+        mydb.executemany(sql_querty_f, film)
         mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
     try:
-        cursor.executemany(sql_querty_cl, clienti)
+        mydb.executemany(sql_querty_cl, clienti)
         mydb.commit()
     except mysql.connector.Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
@@ -77,18 +72,14 @@ def default_values(cursor, mydb):
 
 def select_cinema():
     '''return all instance of cinema table'''
-    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
-    cursor = connection.cursor()
-    cursor.execute("USE Biglietteria_Storico")
-    cursor.execute("SELECT * from Cinema")
+    connection = sqlite3.connect('ticketapp.db')
+    connection.execute("SELECT * from Cinema")
     return cursor.fetchall()
 
 def select_film():
     '''return all instance of film table'''
-    connection = mysql.connector.connect(host='localhost', user='root', passwd='root')
-    cursor = connection.cursor()
-    cursor.execute("USE Biglietteria_Storico")
-    cursor.execute("SELECT * from Film")
+    connection = sqlite3.connect('ticketapp.db')
+    connection.execute("SELECT * from Film")
     return cursor.fetchall()
 
 def print_biglietto(cf_cl, cinema, film):
@@ -97,12 +88,9 @@ def print_biglietto(cf_cl, cinema, film):
     sala = random.randint(1, 10)
     fila = random.choice(string.ascii_lowercase)
     try:
-        mydb = mysql.connector.connect(host="localhost", user="root",\
-            passwd="root")
-        mycursor = mydb.cursor()
-        mycursor.execute("USE Biglietteria_Storico")
+        connection = sqlite3.connect('ticketapp.db')
         datetime_b = datetime.datetime.now()
-        mycursor.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
+        connection.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
             VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
             +str(cinema)+"','"+str(film)+"','"+cf_cl+"')")
         mydb.commit()
