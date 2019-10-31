@@ -3,7 +3,7 @@
 import datetime
 import random
 import string
-import sqlite3 
+import sqlite3
 from sqlite3 import Error
 
 def create_db():
@@ -26,7 +26,6 @@ def create_db():
         print("Error while connecting to MySQL", err)
     finally:
         if mydb.is_connected():
-            mycursor.close()
             mydb.close()
             print("MySQL connection is closed")
 
@@ -54,19 +53,19 @@ def default_values(mydb):
     try:
         mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
-    except mysql.connector.Error as error:
+    except Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_f, film)
         mydb.commit()
-    except mysql.connector.Error as error:
+    except Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_cl, clienti)
         mydb.commit()
-    except mysql.connector.Error as error:
+    except Error as error:
         print("Failed to insert record into MySQL table {}".format(error))
         mydb.rollback()
 
@@ -74,13 +73,13 @@ def select_cinema():
     '''return all instance of cinema table'''
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Cinema")
-    return cursor.fetchall()
+    return connection.fetchall()
 
 def select_film():
     '''return all instance of film table'''
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Film")
-    return cursor.fetchall()
+    return connection.fetchall()
 
 def print_biglietto(cf_cl, cinema, film):
     '''Create ticket'''
@@ -93,7 +92,7 @@ def print_biglietto(cf_cl, cinema, film):
         connection.execute("INSERT INTO Biglietto(Posto, Fila,sala, data, idCinema, idFilm , CF) \
             VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
             +str(cinema)+"','"+str(film)+"','"+cf_cl+"')")
-        mydb.commit()
+        connection.commit()
         print("BIGLIETTO IN STAMPA....")
         print(".......................")
         print(".......................")
