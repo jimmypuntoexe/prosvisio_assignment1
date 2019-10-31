@@ -25,7 +25,6 @@ def create_db():
     except Error as err:
         print("Error while connecting to MySQL", err)
     finally:
-        if mydb.is_connected():
             mydb.close()
             print("MySQL connection is closed")
 
