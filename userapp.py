@@ -9,13 +9,13 @@ import check_functions
 back_database.create_db()
 
 #Insert the Fiscal Code to login.
-CFUSER = raw_input("Insert your Fiscal Code to login: ")
+CFUSER = input("Insert your Fiscal Code to login: ")
 
 #Check if the Fiscal Code is in the database.
 #Otherwise, you can register it as a new user.
 if not check_functions.check_user(CFUSER):
     #Insert new uder after checks.
-    REGISTER = raw_input("Fiscal Code doesn't exist! Do you want to register as new user? (y/n): ")
+    REGISTER = input("Fiscal Code doesn't exist! Do you want to register as new user? (y/n): ")
 
     while REGISTER not in ('y', 'n'):
         REGISTER = input("Error! You have to answer only 'y' or 'n'!: ")
