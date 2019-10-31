@@ -6,7 +6,7 @@ def check_user(user):
     """Check if a client is already insert into database"""
     #Open database connection.
     connection = sqlite3.connect('ticketapp.db')
-    users=connection.execute("SELECT CF FROM Cliente")
+    users = connection.execute("SELECT CF FROM Cliente")
     check = False
     #Check if  user Fiscal Code is already in the database.
     for row in users:
