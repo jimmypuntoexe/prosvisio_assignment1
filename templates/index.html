@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>RENTAL CAR</title>
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+      <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+      <style>
+         body {
+         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+         line-height:1.5em;
+         color: #232323;
+         -webkit-font-smoothing: antialiased;
+         }
+         h1, h2, h3 {
+         font-family: Times, serif;
+         line-height:1.5em;
+         border-bottom: 1px solid #ccc;
+         }
+         .page-header {
+         border-bottom: 0px;
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Begin page content -->
+      <div class="container">
+          <div class="page-header">
+              <h1>WELCOME TO RENTAL CAR!</h1>
+          </div>
+         {% if main %}
+
+         <div class="container">
+          <div class="row">
+            <div class="col-sm">
+                <h1>Client</h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Fiscal Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Date Of Birth</th>
+                        <th scope="col">Place Of Birth</th>
+                        <th scope="col">Sex</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for c in client %}
+                      <tr>
+                          <td>{{ c[0] }}</td>
+                          <td>{{ c[1] }}</td>
+                          <td>{{ c[2] }}</td>
+                          <td>{{ c[3] }}</td>
+                          <td>{{ c[4] }}</td>
+                          <td>{{ c[5] }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-sm">
+                <h1>Rental</h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Plate</th>
+                        <th scope="col">Fiscal Code</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for r in rental %}
+                      <tr>
+                          <td>{{ r[0] }}</td>
+                          <td>{{ r[1] }}</td>
+                          <td>{{ r[2] }}</td>
+                          <td>{{ r[3] }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-sm">
+                <h1>Car</h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Car</th>
+                        <th scope="col">Brand</th>
+                        <th scope="col">Model</th>
+                        <td scope="col">Price</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for c in car %}
+                      <tr>
+                          <td>{{ c[0] }}</td>
+                          <td>{{ c[1] }}</td>
+                          <td>{{ c[2] }}</td>
+                          <td>{{ c[3] }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+
+          </div>
+         <hr>
+        {% endif %}
+      <hr>
+
+      <div id="footer">
+         <div class="container">
+            <p>Processo e Sviluppo del Software 2019 - Balducci Gianmaria & Guidi Alessandro</p>
+         </div>
+      </div>
+
+   </body>
+</html>
