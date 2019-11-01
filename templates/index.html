@@ -112,6 +112,58 @@
 
           </div>
          <hr>
+         
+            <div class="row">
+            <div class="col-sm">
+                <h1>Aggiungi nuovo rivenditore</h1>
+                <form method="POST" action="/addRivenditore">
+                    <div class="container">
+                        <label for="idR"><b>Id rivenditore</b></label>
+                        <input type="text" placeholder="Id rivenditore" name="idR" required>
+                        <br>
+                        <label for="name"><b>Nome</b></label>
+                        <input type="text" placeholder="Nome" name="nome" required>
+                        <br>
+                        <label for="name"><b>Cognome</b></label>
+                        <input type="text" placeholder="Cognome" name="cognome" required>
+
+                        <button type="submit" class="btn btn-default">Aggiungi rivenditore</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm">
+                <h1>Aggiungi nuovo prodotto</h1>
+                <form method="POST" action="/addProdotto">
+                    <div class="container">
+                        <label for="name"><b>Numero seriale</b></label>
+                        <input type="text" placeholder="Seriale" name="seriale" required>
+                        <br>
+                        <label for="name"><b>Nome modello</b></label>
+                        <input type="text" placeholder="Modello" name="modello" required>
+
+                        <button type="submit" class="btn btn-default">Aggiungi nuovo prodotto</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm">
+                <h1>Aggiungi nuova vendita</h1>
+                <form  method="POST" action="/addVendita">
+                    <div class="container">
+                        <label for="serialeV"><b>Numero seriale</b></label>
+                        <input type="text" placeholder="Numero seriale" name="serialeV" required>
+                        <br>
+                        <label for="id"><b>Id rivenditore</b></label>
+                        <input type="text" placeholder="Id rivenditore" name="id" required>
+
+                        <button type="submit" class="btn btn-default">Aggiungi vendita</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        </div>
+
         {% endif %}
       <hr>
 
