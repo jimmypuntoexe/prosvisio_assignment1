@@ -72,7 +72,7 @@ def select_cinema():
     '''return all instance of cinema table'''
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Cinema")
-    return conncetion
+    return connection
     
 def select_film():
     '''return all instance of film table'''
