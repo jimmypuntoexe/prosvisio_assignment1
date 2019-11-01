@@ -72,13 +72,13 @@ def select_cinema():
     '''return all instance of cinema table'''
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Cinema")
-    return connection.fetchall()
-
+    return conncetion
+    
 def select_film():
     '''return all instance of film table'''
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Film")
-    return connection.fetchall()
+    return connection
 
 def print_biglietto(cf_cl, cinema, film):
     '''Create ticket'''
