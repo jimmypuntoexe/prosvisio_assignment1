@@ -18,11 +18,10 @@ def index():
     database.close()
 
     return render_template(
-        "index.html", main=True, car = car, rental = rental, client = client
+        "index.html", main=True, cinema = cinema, film = film, biglietto = biglietto
     )
 
 
 if __name__ == "__main__":
-    #port = int(os.environ.get("PORT", 5000))
-    #app.run(host='0.0.0.0', port=port)
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
