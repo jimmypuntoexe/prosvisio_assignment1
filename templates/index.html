@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>TicketApp</title>
+      <title>RENTAL CAR</title>
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
       <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -30,41 +30,48 @@
       <!-- Begin page content -->
       <div class="container">
           <div class="page-header">
-              <h1>CINEMA FOR YOU, NEW AND OLD FILM</h1>
+              <h1>WELCOME TO RENTAL CAR!</h1>
           </div>
-         {% description/main %}
+         {% if main %}
 
          <div class="container">
           <div class="row">
             <div class="col-sm">
-                <h1>Cinema</h1>
+                <h1>Client</h1>
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Città</th>
+                        <th scope="col">Fiscal Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Date Of Birth</th>
+                        <th scope="col">Place Of Birth</th>
+                        <th scope="col">Sex</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for c in cinema %}
+                      {% for c in client %}
                       <tr>
                           <td>{{ c[0] }}</td>
                           <td>{{ c[1] }}</td>
                           <td>{{ c[2] }}</td>
                           <td>{{ c[3] }}</td>
                           <td>{{ c[4] }}</td>
+                          <td>{{ c[5] }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
             </div>
             <div class="col-sm">
-                <h1>Film</h1>
+                <h1>Rental</h1>
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Titolo</th>
-                        <th scope="col">Regista</th>
+                        <th scope="col">Plate</th>
+                        <th scope="col">Fiscal Code</th>
+                        <th scope="col">Start Date</th>
+                        <th scope="col">End Date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -74,14 +81,12 @@
                           <td>{{ r[1] }}</td>
                           <td>{{ r[2] }}</td>
                           <td>{{ r[3] }}</td>
-                          <td>{{ r[4] }}</td>
-                          <td>{{ r[5] }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
             </div>
-            <!--<div class="col-sm">
+            <div class="col-sm">
                 <h1>Car</h1>
                 <table class="table">
                     <thead>
@@ -103,14 +108,14 @@
                       {% endfor %}
                     </tbody>
                   </table>
-            </div>-->
+            </div>
 
           </div>
          <hr>
          
             <div class="row">
             <div class="col-sm">
-                <h1>Aggiungi nuovo cliente</h1>
+                <h1>Aggiungi nuovo rivenditore</h1>
                 <form method="POST" action="/addRivenditore">
                     <div class="container">
                         <label for="idR"><b>Id rivenditore</b></label>
