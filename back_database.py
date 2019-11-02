@@ -51,18 +51,21 @@ def default_values(mydb):
         sql_querty_cl = "INSERT INTO Cliente (CF, Nome, Cognome, Età) \
         VALUES(?, ?, ?, ?) "
         mydb.executemany(sql_querty_c, cinema)
+        print("CINEMA")
         mydb.commit()
     except Error as error:
         print("Failed to insert record into table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_f, film)
+        print("FILM")
         mydb.commit()
     except Error as error:
         print("Failed to insert record into table {}".format(error))
         mydb.rollback()
     try:
         mydb.executemany(sql_querty_cl, clienti)
+        print("CLIENTI")
         mydb.commit()
     except Error as error:
         print("Failed to insert record into table {}".format(error))

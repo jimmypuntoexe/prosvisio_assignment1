@@ -5,17 +5,14 @@ import sqlite3
 
 back_database.create_db()
 app = Flask(__name__)
-_cf = " "
+_cf = ""
 id_cinema = ""
 id_film = ""
 
 @app.route("/")
 def index():
     connection = sqlite3.connect('ticketapp.db')
-    
-    
     cliente, cinema, film =  back_database.found_table(connection)
-
     connection.close()
 
     return render_template(
