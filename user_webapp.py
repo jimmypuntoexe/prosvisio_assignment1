@@ -14,12 +14,12 @@ def index():
     connection = sqlite3.connect('ticketapp.db')
     
     
-    cinema, film, biglietto =  back_database.found_table(connection)
+    cliente, cinema, film =  back_database.found_table(connection)
 
     connection.close()
 
     return render_template(
-        "index.html", main=True, cinema = cinema, film = film, biglietto = biglietto
+        "index.html", main=True, cliente = cliente, cinema = cinema, film = film
     )
 
 @app.route('/getInfoUser', methods=['GET', 'POST'])

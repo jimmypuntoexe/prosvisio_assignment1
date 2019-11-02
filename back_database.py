@@ -110,16 +110,16 @@ def print_biglietto(cf_cl, cinema, film):
     
 def found_table(connection):
     '''Get the data'''
-    clienti = connection.execute("SELECT * FROM Clienti").fetchall()
-    cinema = connection.execute("SELECT * FROM Cinema").fetchall()
-    film = connection.execute("SELECT * FROM Film").fetchall()
+    clienti = connection.execute("SELECT * FROM Clienti")
+    cinema = connection.execute("SELECT * FROM Cinema")
+    film = connection.execute("SELECT * FROM Film")
     return clienti, cinema, film
 
 
 def insert_clienti(cf, nome, cognome):
 	conn= sqlite3.connect('ticketapp.db')
 	try:
-		conn.execute("INSERT INTO Clienti (cf, nome, cognome) VALUES ('%s', '%s', '%s');" %(cf, nome, cognome))
+		conn.execute("INSERT INTO Cliente (cf, nome, cognome) VALUES ('%s', '%s', '%s');" %(cf, nome, cognome))
 		conn.commit()
 	except:
 		conn.close()
