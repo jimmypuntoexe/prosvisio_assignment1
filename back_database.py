@@ -15,7 +15,7 @@ def create_db():
         mydb.execute("CREATE TABLE IF NOT EXISTS Cinema (idCinema INT \
                 PRIMARY KEY, Nome VARCHAR(50),Città VARCHAR(50))")
         mydb.execute("CREATE TABLE IF NOT EXISTS Cliente (CF VARCHAR(16) \
-                 PRIMARY KEY, Cognome VARCHAR(50),Nome VARCHAR(50), Età INT)")
+                 PRIMARY KEY, Nome VARCHAR(50), Cognome VARCHAR(50), Età INT)")
         mydb.execute("CREATE TABLE IF NOT EXISTS Biglietto (Posto INT, \
                 Fila VARCHAR(1),sala INT, data DATETIME PRIMARY KEY, idCinema INT,\
                 idFilm INT, CF VARCHAR(45), FOREIGN KEY(idCinema) REFERENCES \
