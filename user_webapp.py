@@ -13,11 +13,12 @@ id_film = ""
 def index():
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film =  back_database.found_table(connection)
-    connection.close()
+    
 
     return render_template(
         "index.html", main=True, cliente = cliente, cinema = cinema, film = film
     )
+    connection.close()
 
 @app.route('/getInfoUser', methods=['GET', 'POST'])
 def getInfoUser():
