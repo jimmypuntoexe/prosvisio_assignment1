@@ -41,15 +41,15 @@ def default_values(mydb):
         "24"), ("CF00000000000005", "Gimmy", "Baldu", "24"),\
         ("CF00000000000006", "Mario", "Bianchi", "45")]
     sql_querty_c = "INSERT INTO Cinema (IdCinema, Nome, Città) \
-        VALUES(%s, %s, %s)"
+        VALUES(?, ?, ?)"
     sql_querty_f = """INSERT INTO Film (IdFilm, Titolo, Regista) \
-        VALUES(%s, %s, %s) """
+        VALUES(?, ?, ?) """
     try:
         cinema = [('1', 'The Space', 'Vimercate'), ('2', 'Arcadia', 'Bellinzago'),\
         ('3', 'The movie', 'Busnago'), ('4', 'The Space', 'Torino'),\
         ('5', 'Arcadia', 'Melzo')]
         sql_querty_cl = "INSERT INTO Cliente (CF, Nome, Cognome, Età) \
-        VALUES(%s, %s, %s, %s) "
+        VALUES(?, ?, ?, ?) "
         mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
     except Error as error:
@@ -119,7 +119,7 @@ def found_table(connection):
 def insert_clienti(cf, nome, cognome):
 	conn= sqlite3.connect('ticketapp.db')
 	try:
-		conn.execute("INSERT INTO Cliente (cf, nome, cognome) VALUES ('%s', '%s', '%s');" %(cf, nome, cognome))
+		conn.execute("INSERT INTO Cliente (cf, nome, cognome) VALUES (?, ?, ?);" %(cf, nome, cognome))
 		conn.commit()
 	except:
 		conn.close()
