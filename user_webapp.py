@@ -14,7 +14,7 @@ def index():
     connection = sqlite3.connect('ticketapp.db')
     
     
-    cinema, film, biglietto = rivenditore, cellulare, vendita = back_database.found_table(connection)
+    cinema, film, biglietto =  back_database.found_table(connection)
 
     connection.close()
 
