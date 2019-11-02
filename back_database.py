@@ -116,10 +116,10 @@ def found_table(connection):
     return clienti, cinema, film
 
 
-def insert_clienti(cf, nome, cognome):
+def insert_clienti(cf, nome, cognome, age):
 	conn= sqlite3.connect('ticketapp.db')
 	try:
-		conn.execute("INSERT INTO Cliente (cf, nome, cognome) VALUES (?, ?, ?);" %(cf, nome, cognome))
+		conn.execute("INSERT INTO Cliente (cf, nome, cognome) VALUES (?, ?, ?, ?);" %(cf, nome, cognome, age))
 		conn.commit()
 	except:
 		conn.close()

@@ -27,7 +27,8 @@ def getInfoUser():
     cognome = request.form['cognome']
     age = request.form['età']
 
-    user = back_database.insert_clienti(cf,nome,age)
+    user = back_database.insert_clienti(cf,nome,cognome, age)
+    print(user)
     global _cf
     _cf = cf
     connection = sqlite3.connect('ticketapp.db')
