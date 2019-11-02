@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>RENTAL CAR</title>
+      <title>TicketApp</title>
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
       <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -30,80 +30,72 @@
       <!-- Begin page content -->
       <div class="container">
           <div class="page-header">
-              <h1>WELCOME TO RENTAL CAR!</h1>
+              <h1>TicketApp</h1>
           </div>
          {% if main %}
 
          <div class="container">
           <div class="row">
             <div class="col-sm">
-                <h1>Client</h1>
+                <h1>Users</h1>
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">Fiscal Code</th>
                         <th scope="col">Name</th>
                         <th scope="col">Surname</th>
-                        <th scope="col">Date Of Birth</th>
-                        <th scope="col">Place Of Birth</th>
-                        <th scope="col">Sex</th>
+                        <th scope="col">Age</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for c in client %}
+                      {% for c in clienti %}
                       <tr>
                           <td>{{ c[0] }}</td>
                           <td>{{ c[1] }}</td>
                           <td>{{ c[2] }}</td>
                           <td>{{ c[3] }}</td>
-                          <td>{{ c[4] }}</td>
-                          <td>{{ c[5] }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
             </div>
             <div class="col-sm">
-                <h1>Rental</h1>
+                <h1>Cinema</h1>
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Plate</th>
-                        <th scope="col">Fiscal Code</th>
-                        <th scope="col">Start Date</th>
-                        <th scope="col">End Date</th>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Città</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for r in rental %}
+                      {% for r in Cinema %}
                       <tr>
                           <td>{{ r[0] }}</td>
                           <td>{{ r[1] }}</td>
                           <td>{{ r[2] }}</td>
-                          <td>{{ r[3] }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
                   </table>
             </div>
             <div class="col-sm">
-                <h1>Car</h1>
+                <h1>Film</h1>
                 <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">Car</th>
-                        <th scope="col">Brand</th>
-                        <th scope="col">Model</th>
-                        <td scope="col">Price</td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Titolo</th>
+                        <th scope="col">Regista</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for c in car %}
+                      {% for c in Film %}
                       <tr>
                           <td>{{ c[0] }}</td>
                           <td>{{ c[1] }}</td>
                           <td>{{ c[2] }}</td>
-                          <td>{{ c[3] }}</td>
                       </tr>
                       {% endfor %}
                     </tbody>
@@ -115,48 +107,45 @@
          
             <div class="row">
             <div class="col-sm">
-                <h1>Aggiungi nuovo rivenditore</h1>
-                <form method="POST" action="/addRivenditore">
+                <h1>Inserisci i dati</h1>
+                <form method="POST" action="/getInfoUser">
                     <div class="container">
-                        <label for="idR"><b>Id rivenditore</b></label>
-                        <input type="text" placeholder="Id rivenditore" name="idR" required>
+                        <label for="idR"><b>Codice fiscale</b></label>
+                        <input type="text" placeholder="CF" name="codice_fiscale" required>
                         <br>
                         <label for="name"><b>Nome</b></label>
                         <input type="text" placeholder="Nome" name="nome" required>
                         <br>
                         <label for="name"><b>Cognome</b></label>
                         <input type="text" placeholder="Cognome" name="cognome" required>
+                        <label for="name"><b>Età</b></label>
+                        <input type="text" placeholder="Età" name="età" required>
+                        <br>
 
-                        <button type="submit" class="btn btn-default">Aggiungi rivenditore</button>
+                        <button type="submit" class="btn btn-default">Invia</button>
                     </div>
                 </form>
             </div>
             <div class="col-sm">
-                <h1>Aggiungi nuovo prodotto</h1>
-                <form method="POST" action="/addProdotto">
+                <h1>Scelta Cinema</h1>
+                <form method="POST" action="/getCinema">
                     <div class="container">
-                        <label for="name"><b>Numero seriale</b></label>
-                        <input type="text" placeholder="Seriale" name="seriale" required>
+                        <label for="name"><b>ID cinema</b></label>
+                        <input type="text" placeholder="ID" name="id_cinema" required>
                         <br>
-                        <label for="name"><b>Nome modello</b></label>
-                        <input type="text" placeholder="Modello" name="modello" required>
-
-                        <button type="submit" class="btn btn-default">Aggiungi nuovo prodotto</button>
+                        <button type="submit" class="btn btn-default">Invia</button>
                     </div>
                 </form>
             </div>
 
             <div class="col-sm">
-                <h1>Aggiungi nuova vendita</h1>
-                <form  method="POST" action="/addVendita">
+                <h1>Scelta Film</h1>
+                <form  method="POST" action="/getFilm">
                     <div class="container">
-                        <label for="serialeV"><b>Numero seriale</b></label>
-                        <input type="text" placeholder="Numero seriale" name="serialeV" required>
+                        <label for="serialeV"><b>ID film</b></label>
+                        <input type="text" placeholder="ID" name="id_film" required>
                         <br>
-                        <label for="id"><b>Id rivenditore</b></label>
-                        <input type="text" placeholder="Id rivenditore" name="id" required>
-
-                        <button type="submit" class="btn btn-default">Aggiungi vendita</button>
+                        <button type="submit" class="btn btn-default">Invia</button>
                     </div>
                 </form>
             </div>

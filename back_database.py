@@ -80,6 +80,9 @@ def select_film():
     connection.execute("SELECT * from Film")
     return connection
 
+
+
+
 def print_biglietto(cf_cl, cinema, film):
     '''Create ticket'''
     posto = random.randint(1, 25)
@@ -104,3 +107,49 @@ def print_biglietto(cf_cl, cinema, film):
         print("Ora è disponibile una nuova operazione")
     except Error as err:
         print("Error while connecting to MySQL", err)
+    
+def found_table(connection):
+    '''Get the data'''
+    clienti = connection.execute("SELECT * FROM Clienti").fetchall()
+    cinema = connection.execute("SELECT * FROM Cinema").fetchall()
+    film = connection.execute("SELECT * FROM Film").fetchall()
+    return clienti, cinema, film
+
+
+def insert_clienti(cf, nome, cognome):
+	conn= sqlite3.connect('ticketapp.db')
+	try:
+		conn.execute("INSERT INTO Clienti (cf, nome, cognome) VALUES ('%s', '%s', '%s');" %(cf, nome, cognome))
+		conn.commit()
+	except:
+		conn.close()
+		return False
+	conn.close()
+	return True
+
+
+'''
+def make_ticket(n_seriale,id_rivenditore):
+	database = sqlite3.connect('ticketapp.db')
+	results = database.execute("SELECT n_vendita FROM vendita ORDER BY n_vendita DESC LIMIT 1")
+
+	n_vendita = 1
+	for row in results:
+		flag=True;
+		while(flag):
+			n_vendita = row[0] + 1;
+			flag= False;
+
+	try:
+		database.execute("INSERT INTO vendita(n_vendita,n_seriale,id_rivenditore) VALUES ('%s', '%s', '%s');" %(n_vendita,n_seriale,id_rivenditore))
+		conn.commit()
+	except:
+		conn.rollback()
+		conn.close()
+		return False
+
+	conn.close()
+	return True
+'''
+
+
