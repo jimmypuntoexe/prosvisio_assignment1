@@ -110,7 +110,7 @@ def print_biglietto(cf_cl, cinema, film):
     
 def found_table(connection):
     '''Get the data'''
-    clienti = connection.execute("SELECT * FROM Clienti")
+    clienti = connection.execute("SELECT * FROM Cliente")
     cinema = connection.execute("SELECT * FROM Cinema")
     film = connection.execute("SELECT * FROM Film")
     return clienti, cinema, film
