@@ -32,7 +32,7 @@ def getInfoUser():
     _cf = cf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-    connection.close()
+    
     
 
     return render_template(
@@ -41,6 +41,7 @@ def getInfoUser():
         cinema = cinema,
         film = film
     )
+    connection.close()
 
 @app.route('/getFilm', methods=['GET', 'POST'])
 def getFilm():
@@ -49,7 +50,6 @@ def getFilm():
     cliente, cinema, film = back_database.found_table(connection)
     global id_film
     id_film = id
-    connection.close()
     
 
     return render_template(
@@ -58,6 +58,7 @@ def getFilm():
         cinema = cinema,
         film = film
     )
+    connection.close()
 
 @app.route('/getCinema', methods=['GET', 'POST'])
 def getCinema():
@@ -67,7 +68,6 @@ def getCinema():
     cliente, cinema, film = back_database.found_table(connection)
     global id_cinema
     id_cinema = id
-    connection.close()
 
     
 
@@ -77,6 +77,7 @@ def getCinema():
         cinema = cinema,
         film = film
     )
+    connection.close()
 
 
 
