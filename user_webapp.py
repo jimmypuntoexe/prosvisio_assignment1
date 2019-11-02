@@ -26,6 +26,8 @@ def getInfoUser():
     nome = request.form['nome']
     cognome = request.form['cognome']
     age = request.form['età']
+    print(cf)
+    print(age)
 
     user = back_database.insert_clienti(cf,nome,cognome, age)
     print(user)
