@@ -20,7 +20,6 @@ build:
     stage: build
     script:
         - echo "Building"
-        - echo $CI_JOB_TOKEN
         - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
         - docker build -t $CONTAINER_IMAGE .
         - docker push $CONTAINER_IMAGE
@@ -32,7 +31,6 @@ verify:
         - pyflakes user_webapp.py
         - pyflakes back_database.py
         - pyflakes check_functions.py
-    allow_failure: true
     
     
     
@@ -62,6 +60,7 @@ deploy:
     stage: deploy
     image: ruby:latest
     script:
+        - echo "Deploy"
         - apk update && apk add git
         - apt-get update -qy
         - apt-get install -y ruby-dev
