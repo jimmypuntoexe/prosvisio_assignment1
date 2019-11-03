@@ -120,7 +120,7 @@ def insert_clienti(cf, nome, cognome, age):
 	conn= sqlite3.connect('ticketapp.db')
 	try:
 	    insert_new_cliente = "INSERT INTO Cliente(CF, Nome, Cognome, Età) VALUES (?, ?, ?, ?)"
-		cliente = ((str(cf),str(nome),str(cognome),str(age))
+		cliente = (str(cf),str(nome),str(cognome),str(age))
 		conn.executemany(insert_new_cliente, cliente)
 		conn.commit()
 	except:
