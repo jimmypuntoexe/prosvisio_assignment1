@@ -128,7 +128,7 @@
             </div>
             <div class="col-sm">
                 <h1>Scegli cinema e film</h1>
-                <form method="GET" action="/printTicket">
+                <form method="POST" action="/printTicket">
                     <div class="container">
                         <label for="codice_fiscale"><b>Codice fiscale</b></label>
                         <input type="text" placeholder="CF" name="codice_fiscale" id="CF_id" required>
@@ -142,7 +142,10 @@
                         <button type="submit" class="btn btn-default" onclick="myFunctionPrint()">Stampa</button>
                         <!--<button type="button" onclick="myFunctionPrint()">Stampa</button>-->
                         <br>
-                        <textarea rows="10" cols="30" readonly id="Print">
+                        
+                    </div>
+                </form>
+                <textarea rows="10" cols="30" readonly id="Print">
                             Stampa Biglietto
                         </textarea>
                         <script>
@@ -154,8 +157,6 @@
                               document.getElementById("Print").innerHTML = x;
                             }
                             </script>
-                    </div>
-                </form>
             </div>
             <!--
             <div class="col-sm">
