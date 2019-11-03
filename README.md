@@ -24,12 +24,13 @@ The database is made of four table:
 *  Cliente: contains the information of customer who have buy a tickets(**CF**,Nome,Cognome,Età)
 *  Biglietto: contains tickets information of the chosen show(Posto,Fila,Sala,**DataTime**)
 
-## DevOps
+# DevOps
 
-# Container
+## Container
 We use Docker for the containerization.
-The application uses two docker images:
- * Application: python 3.7
+The application uses docker images:
+ * Application:  Python 3.7
+ * To deploy:  Ruby(latest)
  
 # Continuous Integration and Continuous Deployment CI/CD
 We exploit the CI/CD tool provide by GitLab for create the pipeline.
@@ -38,6 +39,7 @@ The pipeline have five stages:
   
     - `script:`
         - `echo "Building"`
+        - `echo $CI_JOB_TOKEN`
         - `docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com` 
         - `docker build -t $CONTAINER_IMAGE`  
         - `docker push $CONTAINER_IMAGE`
@@ -68,7 +70,7 @@ The pipeline have five stages:
         - `docker push $CONTAINER_RELEASE_IMAGE`
         
 * **deploy**: the web application live in heroku server at url https://assignment1-balducci-guidi.herokuapp.com/
-              that comunicates with gitlab through $HEROKU_API_KEY`
+              that comunicates with gitlab through $HEROKU_API_KEY for authentication
     
     - `script:`
         - `apk update && apk add git`
