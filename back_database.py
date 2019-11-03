@@ -116,8 +116,9 @@ def insert_clienti(cf, nome, cognome, age):
         cliente = (str(cf),str(nome),str(cognome),str(age))
         conn.executemany(insert_new_cliente, cliente)
         conn.commit()
-    except:
+    except Error as error:
         conn.close()
+        print("Failed to insert record into table {}".format(error))
         return False
     conn.close()
     return True
