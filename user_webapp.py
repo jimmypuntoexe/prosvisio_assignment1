@@ -1,3 +1,4 @@
+'''webapp'''
 from flask import Flask, render_template, request
 import os
 import back_database
@@ -12,11 +13,9 @@ id_film = ""
 @app.route("/")
 def index():
     connection = sqlite3.connect('ticketapp.db')
-    cliente, cinema, film =  back_database.found_table(connection)
-    
-
+    cliente, cinema, film = back_database.found_table(connection)
     return render_template(
-        "index.html", main=True, cliente = cliente, cinema = cinema, film = film
+        "index.html", main=True, cliente=cliente, cinema=cinema, film=film
     )
     connection.close()
 
@@ -28,7 +27,7 @@ def getRegInfoUser():
     age = request.form['età']
     print(cf)
     print(age)
-    user = back_database.insert_clienti(cf,nome,cognome, age)
+    user = back_database.insert_clienti(cf, nome, cognome, age)
     print(user)
     global _cf
     _cf = cf
@@ -37,9 +36,9 @@ def getRegInfoUser():
 
     return render_template(
         "index.html", main=True,
-        cliente = cliente,
-        cinema = cinema,
-        film = film
+        cliente=cliente,
+        cinema=cinema,
+        film=film
     )
     connection.close()
 
@@ -54,9 +53,9 @@ def printTicket():
 
     return render_template(
         "index.html", main=True,
-        cliente = cliente,
-        cinema = cinema,
-        film = film
+        cliente=cliente,
+        cinema=cinema,
+        film=film
     )
     connection.close()
 
