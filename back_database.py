@@ -95,18 +95,11 @@ def print_biglietto(cf_cl, cinema, film):
             VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
             +str(cinema)+"','"+str(film)+"','"+cf_cl+"')")
         connection.commit()
-        print("BIGLIETTO IN STAMPA....")
-        print(".......................")
-        print(".......................")
-        print(".......................")
-        print("Own: "+cf_cl+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+\
-            " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b))
-        print(".......................")
-        print(".......................")
-        print(".......................")
-        print("Ora è disponibile una nuova operazione")
+        ticket = "Own: "+cf_cl+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+ \
+                " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b)
     except Error as err:
-        print("Error while connecting to MySQL", err)
+        print("Error while connecting to Sqlite", err)
+    return ticket
     
 def found_table(connection):
     '''Get the data'''

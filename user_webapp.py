@@ -21,7 +21,7 @@ def index():
     connection.close()
 
 @app.route('/getRegInfoUser', methods=['GET', 'POST'])
-def getInfoUser():
+def getRegInfoUser():
     cf = request.form['codice_fiscale']
     nome = request.form['nome']
     cognome = request.form['cognome']
@@ -35,8 +35,6 @@ def getInfoUser():
     _cf = cf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-    
-    
 
     return render_template(
         "index.html", main=True,
@@ -46,6 +44,15 @@ def getInfoUser():
     )
     connection.close()
 
+@app.route('/printTicket', methods=['GET', 'POST'])
+def printTicket():
+    cf = request.form['codice_fiscale']
+    id_c = request.form['cinema_id']
+    id_f = request.form['film_id']
+    
+    ticket = back_database.print_biglietto(cf, id_c, id_f)
+
+'''
 @app.route('/getFilm', methods=['GET', 'POST'])
 def getFilm():
     id = request.form['film_id']
@@ -81,7 +88,7 @@ def getCinema():
         film = film
     )
     connection.close()
-
+'''
 
 
 

@@ -107,7 +107,7 @@
          <!-- Login, add client -->
             <div class="row">
             <div class="col-sm">
-                <h1>Inserisci i dati</h1>
+                <h1>Registrati</h1>
                 <form method="POST" action="/getRegInfoUser">
                     <div class="container">
                         <label for="idR"><b>Codice fiscale</b></label>
@@ -127,17 +127,36 @@
                 </form>
             </div>
             <div class="col-sm">
-                <h1>Scelta Cinema</h1>
-                <form method="POST" action="/getCinema">
+                <h1>Scegli cinema e film</h1>
+                <form method="POST" action="/printTicket">
                     <div class="container">
-                        <label for="name"><b>ID cinema</b></label>
-                        <input type="text" placeholder="ID" name="id_cinema" required>
+                        <label for="idR"><b>Codice fiscale</b></label>
+                        <input type="text" placeholder="CF" name="codice_fiscale" id="CF_id" required>
                         <br>
-                        <button type="submit" class="btn btn-default">Invia</button>
+                        <label for="name_cinema"><b>ID cinema</b></label>
+                        <input type="text" placeholder="ID" name="id_cinema" id="cinema_id" required>
+                        <br>
+                        <label for="film"><b>ID film</b></label>
+                        <input type="text" placeholder="ID" name="id_film" id="film_id" required>
+                        <br>
+                        <button type="submit" class="btn btn-default" onclick="myFunctionPrint()">Invia</button>
+                        <!--<button type="button" onclick="myFunctionPrint()">Stampa</button>-->
+                        <textarea readonly id="Print">
+                            Stampa Biglietto
+                        </textarea>
+                        <script>
+                            function myFunctionPrint() {
+                              var cf = document.getElementById("CF_id").value;
+                              var cin = document.getElementById("cinema_id").value;
+                              var film = document.getElementById("film_id").value;
+                              x = "Biglietto acquistato, Own: "+cf+" , movie: "+film+" , cinema: "+cin
+                              document.getElementById("Print").innerHTML = x;
+                            }
+                            </script>
                     </div>
                 </form>
             </div>
-
+            <!--
             <div class="col-sm">
                 <h1>Scelta Film</h1>
                 <form  method="POST" action="/getFilm">
@@ -148,9 +167,7 @@
                         <button type="submit" class="btn btn-default">Invia</button>
                     </div>
                 </form>
-            </div>
-        </div>
-
+            </div> -->
         </div>
 
         {% endif %}
