@@ -31,7 +31,7 @@ def getreginfouser():
     print(age)
     user = back_database.insert_clienti(codf, nome, cognome, age)
     print(user)
-    #global _CF
+    global _CF
     _CF = codf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
