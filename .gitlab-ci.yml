@@ -6,56 +6,55 @@ services:
 #Environment variables
 variables:
     CONTAINER_IMAGE: registry.gitlab.com/jiimmy.exe/2019_assignment1_balducci_guidi
- #MYSQL_ROOT_PASSWORD: root
- #MYSQL_DATABASE: 
     CONTAINER_RELEASE_IMAGE: registry.gitlab.com/jiimmy.exe/2019_assignment1_balducci_guidi:latest
 
 #stages
 stages:
-    #- build
+    - build
     - verify
-    #- test-unit
-    #- release
+    - test-unit
+    - release
     - deploy
 
-#build:
- #   stage: build
-  #  script:
-   #     - echo "Building"
-     #   - echo $CI_JOB_TOKEN
-      #  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-       # - docker build -t $CONTAINER_IMAGE .
-        #- docker push $CONTAINER_IMAGE
-#verify:
- #   stage: verify
-  #  image: $CONTAINER_IMAGE
-   # script:
-    #    - pylint userapp.py
-     #   - pylint back_database.py
-      #  - pylint check_functions.py
+build:
+    stage: build
+    script:
+        - echo "Building"
+        - echo $CI_JOB_TOKEN
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+        - docker build -t $CONTAINER_IMAGE .
+        - docker push $CONTAINER_IMAGE
+verify:
+    stage: verify
+    image: $CONTAINER_IMAGE
+    script:
+        - pylint userapp.py
+        - pylint user_webapp.py
+        - pylint back_database.py
+        - pylint check_functions.py
     
     
     
     
-#test-unit:
- #   stage: test-unit
-   # image: $CONTAINER_IMAGE
-    #services: 
-     #   - MySql:5.7
-    #script:
-     #   - echo "Unit-test"
-      #  - python test.py
+test-unit:
+    stage: test-unit
+    image: $CONTAINER_IMAGE
+    services: 
+        - MySql:5.7
+    script:
+        - echo "Unit-test"
+        - python test.py
        
         
 
-#release:
- #   stage: release
-  #  script:
-   #     - echo "Realese"
-    #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-     #   - docker pull $CONTAINER_IMAGE
-      #  - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
-       # - docker push $CONTAINER_RELEASE_IMAGE
+release:
+    stage: release
+    script:
+        - echo "Realese"
+        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+        - docker pull $CONTAINER_IMAGE
+        - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
+        - docker push $CONTAINER_RELEASE_IMAGE
 
 
 deploy:
