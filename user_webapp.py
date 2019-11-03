@@ -10,8 +10,8 @@ _CF = ""
 ID_CINEMA = ""
 ID_FILM = ""
 
-
-@APP.route("/") '''return home page'''
+'''return home page'''
+@APP.route("/") 
 def index():
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
@@ -32,7 +32,7 @@ def getreginfouser():
     user = back_database.insert_clienti(codf, nome, cognome, age)
     print(user)
     global _CF
-    _CF = codf
+    #_CF = codf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
     connection.close()
@@ -49,7 +49,7 @@ def printticket():
     codf = request.form['codice_fiscale']
     id_c = request.form['cinema_id']
     id_f = request.form['film_id']
-    ticket = back_database.print_biglietto(codf, id_c, id_f)
+    back_database.print_biglietto(codf, id_c, id_f)
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
     connection.close()
