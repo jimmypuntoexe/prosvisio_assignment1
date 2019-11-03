@@ -55,13 +55,11 @@ The pipeline have five stages:
   * **test-unit**: in this stage we test the application using the library "pyflakes" imported in the script "test.py"
     
     - `script:`
-        - `echo "Unit-test"`
         - `python test.py`
 `
   * **release**: Create a tag target-image that refers to source_image that is the latest and upload the repository
     
     - `script:`
-        - `echo "Realese"`
         - `docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com`
         - `docker pull $CONTAINER_IMAGE`
         - `docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE`
