@@ -10,9 +10,9 @@ _CF = ""
 ID_CINEMA = ""
 ID_FILM = ""
 
-'''return home page'''
 @APP.route("/")
 def index():
+'''return home page'''
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
     connection.close()
