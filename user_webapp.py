@@ -28,7 +28,6 @@ def getRegInfoUser():
     age = request.form['età']
     print(cf)
     print(age)
-
     user = back_database.insert_clienti(cf,nome,cognome, age)
     print(user)
     global _cf
@@ -49,8 +48,17 @@ def printTicket():
     cf = request.form['codice_fiscale']
     id_c = request.form['cinema_id']
     id_f = request.form['film_id']
-    
     ticket = back_database.print_biglietto(cf, id_c, id_f)
+    connection = sqlite3.connect('ticketapp.db')
+    cliente, cinema, film = back_database.found_table(connection)
+
+    return render_template(
+        "index.html", main=True,
+        cliente = cliente,
+        cinema = cinema,
+        film = film
+    )
+    connection.close()
 
 '''
 @app.route('/getFilm', methods=['GET', 'POST'])
