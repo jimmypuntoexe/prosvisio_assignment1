@@ -99,7 +99,6 @@ def print_biglietto(cf_cl, cinema, film):
                 " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b)
     except Error as err:
         print("Error while connecting to Sqlite", err)
-    return ticket
     
 def found_table(connection):
     '''Get the data'''
