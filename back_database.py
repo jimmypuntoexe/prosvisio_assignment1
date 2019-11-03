@@ -73,7 +73,6 @@ def select_cinema():
     connection = sqlite3.connect('ticketapp.db')
     connection.execute("SELECT * from Cinema")
     return connection
-    
 def select_film():
     '''return all instance of film table'''
     connection = sqlite3.connect('ticketapp.db')
@@ -95,11 +94,10 @@ def print_biglietto(cf_cl, cinema, film):
             VALUES('"+str(posto)+"','"+fila+"','"+str(sala)+"','"+str(datetime_b)+"','" \
             +str(cinema)+"','"+str(film)+"','"+cf_cl+"')")
         connection.commit()
-        ticket = "Own: "+cf_cl+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+ \
-                " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b)
+        #ticket = "Own: "+cf_cl+" Cinema: "+str(cinema)+" Movie: "+str(film)+" Seat: "+str(posto)+ \
+        #        " Row: "+fila+" auditorium: "+str(sala)+" Date: "+str(datetime_b)
     except Error as err:
         print("Error while connecting to Sqlite", err)
-    
 def found_table(connection):
     '''Get the data'''
     clienti = connection.execute("SELECT * FROM Cliente")
@@ -107,12 +105,12 @@ def found_table(connection):
     film = connection.execute("SELECT * FROM Film")
     return clienti, cinema, film
 
-
-def insert_clienti(cf, nome, cognome, age):
-    conn= sqlite3.connect('ticketapp.db')
+'''Inset into database a new client '''
+def insert_clienti(codf, nome, cognome, age):
+    conn = sqlite3.connect('ticketapp.db')
     try:
         insert_new_cliente = "INSERT INTO Cliente(CF, Nome, Cognome, Età) VALUES (?, ?, ?, ?)"
-        cliente = [(cf, nome, cognome, age)]
+        cliente = [(codf, nome, cognome, age)]
         conn.executemany(insert_new_cliente, cliente)
         conn.commit()
     except Error as error:
@@ -121,30 +119,3 @@ def insert_clienti(cf, nome, cognome, age):
         return False
     conn.close()
     return True
-
-
-'''
-def make_ticket(n_seriale,id_rivenditore):
-	database = sqlite3.connect('ticketapp.db')
-	results = database.execute("SELECT n_vendita FROM vendita ORDER BY n_vendita DESC LIMIT 1")
-
-	n_vendita = 1
-	for row in results:
-		flag=True;
-		while(flag):
-			n_vendita = row[0] + 1;
-			flag= False;
-
-	try:
-		database.execute("INSERT INTO vendita(n_vendita,n_seriale,id_rivenditore) VALUES ('%s', '%s', '%s');" %(n_vendita,n_seriale,id_rivenditore))
-		conn.commit()
-	except:
-		conn.rollback()
-		conn.close()
-		return False
-
-	conn.close()
-	return True
-'''
-
-
