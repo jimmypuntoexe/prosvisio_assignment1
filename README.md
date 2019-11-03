@@ -49,12 +49,12 @@ The pipeline have five stages:
     For this purpose we used Pylint
     
     - `script:`
-        - `pylint userapp.py`
-        - `pylint user_webapp.py`
-        - `pylint back_database.py`
-        - `pylint check_functions.py`
+        - `pyflakes userapp.py`
+        - `pyflakes user_webapp.py`
+        - `pyflakes back_database.py`
+        - `pyflakes check_functions.py`
 `
-  * **test-unit**: in this stage we test the application using the library "unittest" imported in the script "test.py"
+  * **test-unit**: in this stage we test the application using the library "pyflakes" imported in the script "test.py"
     
     - `script:`
         - `echo "Unit-test"`
