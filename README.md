@@ -38,8 +38,6 @@ The pipeline have five stages:
   * **build**: create application's docker and build a runnable instance of application. Then push it in the repository
   
     - `script:`
-        - `echo "Building"`
-        - `echo $CI_JOB_TOKEN`
         - `docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com` 
         - `docker build -t $CONTAINER_IMAGE`  
         - `docker push $CONTAINER_IMAGE`
