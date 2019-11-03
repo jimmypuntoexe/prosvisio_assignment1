@@ -16,7 +16,7 @@ The application manages the sale of cinema tickets, through a database of severa
 
 In this way,it's possibile reserve tickets for cinema to watch your favorite film.
 
-For the database,we used MySql,instead the application is was written using *Python*,  which used his library *mysql.connector* as interface.  
+For the database,we used sqlite,instead the application was written using *Python*,  which used his library *sqlite3* as interface.  
 
 The database is made of four table:
 *  Cinema: contains the information related to cinema(**Id**,Nome,Città)
@@ -30,8 +30,6 @@ The database is made of four table:
 We use Docker for the containerization.
 The application uses two docker images:
  * Application: python 3.7
- * Database: SQLite
-
  
 # Continuous Integration and Continuous Deployment CI/CD
 We exploit the CI/CD tool provide by GitLab for create the pipeline.
@@ -69,7 +67,8 @@ The pipeline have five stages:
         - `docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE`
         - `docker push $CONTAINER_RELEASE_IMAGE`
         
-* **deploy**: the web application live in heroku server at url https://assignment1-balducci-guidi.herokuapp.com/.
+* **deploy**: the web application live in heroku server at url https://assignment1-balducci-guidi.herokuapp.com/
+              that comunicates with gitlab through $HEROKU_API_KEY`
     
     - `script:`
         - `apk update && apk add git`
