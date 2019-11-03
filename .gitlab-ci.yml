@@ -28,10 +28,10 @@ verify:
     stage: verify
     image: $CONTAINER_IMAGE
     script:
-        - pylint userapp.py
-        #- pylint user_webapp.py
-        - pylint back_database.py
-        - pylint check_functions.py
+        - pyflakes userapp.py
+        - pyflakes user_webapp.py
+        - pyflakes back_database.py
+        - pyflakes check_functions.py
     allow_failure: true
     
     
