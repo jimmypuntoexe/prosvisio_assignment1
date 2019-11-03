@@ -30,48 +30,53 @@ The database is made of four table:
 We use Docker for the containerization.
 The application uses two docker images:
  * Application: python 3.7
- * Database: mysql 5.7
+ * Database: SQLite
 
  
 # Continuous Integration and Continuous Deployment CI/CD
 We exploit the CI/CD tool provide by GitLab for create the pipeline.
-The pipeline have two stages:
-  * build: create application's docker and build a runnable instance of application.Then push it in the repository
-  `script:
-        - echo "Building"
-        - echo $CI_JOB_TOKEN
-        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-        - docker build -t $CONTAINER_IMAGE .
-        - docker push $CONTAINER_IMAGE
-`
-  * verify: analize code for programming errors, helps enforcing a coding standard,
+The pipeline have five stages:
+  * **build**: create application's docker and build a runnable instance of application. Then push it in the repository
+  
+    - `script:`
+        - `echo "Building"`
+        - `docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com` 
+        - `docker build -t $CONTAINER_IMAGE`  
+        - `docker push $CONTAINER_IMAGE`
+        
+  * **verify**: analize code for programming errors, helps enforcing a coding standard,
     sniffs for code smells and offers simple refactoring suggestions
     For this purpose we used Pylint
-    `script:
-        - pylint userapp.py
-        - pylint user_webapp.py
-        - pylint back_database.py
-        - pylint check_functions.py
+    
+    - `script:`
+        - `pylint userapp.py`
+        - `pylint user_webapp.py`
+        - `pylint back_database.py`
+        - `pylint check_functions.py`
 `
-  * test-unit: in this stage we test the application using the library "unittest" imported in the script "test.py"
-    `script:
-        - echo "Unit-test"
-        - python test.py
+  * **test-unit**: in this stage we test the application using the library "unittest" imported in the script "test.py"
+    
+    - `script:`
+        - `echo "Unit-test"`
+        - `python test.py`
 `
-  * release: Create a tag target-image that refers to source_image that is the latest and upload the repository
-    `script:
-        - echo "Realese"
-        - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
-        - docker pull $CONTAINER_IMAGE
-        - docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE
-        - docker push $CONTAINER_RELEASE_IMAGE
-* deploy: the web application live in heroku srver at url https://assignment1-balducci-guidi.herokuapp.com/
-    `script:
-        - apk update && apk add git
-        - apt-get update -qy
-        - apt-get install -y ruby-dev
-        - gem install dpl
-        - dpl --provider=heroku --app=$HEROKU_NAME_PROJECT --api-key=$HEROKU_API_KEY
+  * **release**: Create a tag target-image that refers to source_image that is the latest and upload the repository
+    
+    - `script:`
+        - `echo "Realese"`
+        - `docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com`
+        - `docker pull $CONTAINER_IMAGE`
+        - `docker tag $CONTAINER_IMAGE $CONTAINER_RELEASE_IMAGE`
+        - `docker push $CONTAINER_RELEASE_IMAGE`
+        
+* **deploy**: the web application live in heroku server at url https://assignment1-balducci-guidi.herokuapp.com/.
+    
+    - `script:`
+        - `apk update && apk add git`
+        - `apt-get update -qy`
+        - `apt-get install -y ruby-dev`
+        - `gem install dpl`
+        - `dpl --provider=heroku --app=$HEROKU_NAME_PROJECT --api-key=$HEROKU_API_KEY`
 `
 
            
