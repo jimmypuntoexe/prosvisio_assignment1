@@ -15,10 +15,11 @@ ID_FILM = ""
 def index():
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-    connection.close()
+    
     return render_template(
         "index.html", main=True, cliente=cliente, cinema=cinema, film=film
     )
+    connection.close()
 
 '''Add client for buy ticket'''
 @APP.route('/getreginfouser', methods=['GET', 'POST'])
@@ -35,13 +36,14 @@ def getreginfouser():
     _CF = codf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-    connection.close()
+    
     return render_template(
         "index.html", main=True,
         cliente=cliente,
         cinema=cinema,
         film=film
     )
+    connection.close()
 
 '''Insert ticket and print it '''
 @APP.route('/printticket', methods=['GET', 'POST'])
@@ -52,14 +54,14 @@ def printticket():
     back_database.print_biglietto(codf, id_c, id_f)
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-    connection.close()
     return render_template(
         "index.html", main=True,
         cliente=cliente,
         cinema=cinema,
         film=film
     )
-
+    connection.close()
+    
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 5000))
     APP.run(host='0.0.0.0', port=PORT)
