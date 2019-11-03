@@ -110,13 +110,13 @@
                 <h1>Registrati</h1>
                 <form method="POST" action="/getRegInfoUser">
                     <div class="container">
-                        <label for="idR"><b>Codice fiscale</b></label>
+                        <label for="codice_fiscale"><b>Codice fiscale</b></label>
                         <input type="text" placeholder="CF" name="codice_fiscale" required>
                         <br>
                         <label for="name"><b>Nome</b></label>
                         <input type="text" placeholder="Nome" name="nome" required>
                         <br>
-                        <label for="name"><b>Cognome</b></label>
+                        <label for="surname"><b>Cognome</b></label>
                         <input type="text" placeholder="Cognome" name="cognome" required>
                         <label for="name"><b>Età</b></label>
                         <input type="text" placeholder="Età" name="età" required>
@@ -130,7 +130,7 @@
                 <h1>Scegli cinema e film</h1>
                 <form method="POST" action="/printTicket">
                     <div class="container">
-                        <label for="idR"><b>Codice fiscale</b></label>
+                        <label for="codice_fiscale"><b>Codice fiscale</b></label>
                         <input type="text" placeholder="CF" name="codice_fiscale" id="CF_id" required>
                         <br>
                         <label for="name_cinema"><b>ID cinema</b></label>
@@ -142,7 +142,7 @@
                         <button type="submit" class="btn btn-default" onclick="myFunctionPrint()">Stampa</button>
                         <!--<button type="button" onclick="myFunctionPrint()">Stampa</button>-->
                         <br>
-                        <textarea readonly id="Print">
+                        <textarea rows="10" cols="90" readonly id="Print">
                             Stampa Biglietto
                         </textarea>
                         <script>
