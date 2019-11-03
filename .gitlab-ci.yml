@@ -32,7 +32,7 @@ verify:
         - pylint user_webapp.py
         - pylint back_database.py
         - pylint check_functions.py
-    allow_failure:true
+    allow_failure: true
     
     
     
