@@ -29,9 +29,7 @@ verify:
     image: $CONTAINER_IMAGE
     script:
         - pylint userapp.py
-        - allow_failure: true
         - pylint user_webapp.py
-        - allow_failure: true
         - pylint back_database.py
         - pylint check_functions.py
     allow_failure: true
