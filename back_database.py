@@ -40,16 +40,16 @@ def default_values(mydb):
         "Andrea", "Carubelli", "23"), ("CF00000000000004", "Leo", "Lozio",\
         "24"), ("CF00000000000005", "Gimmy", "Baldu", "24"),\
         ("CF00000000000006", "Mario", "Bianchi", "45")]
-    sql_querty_c = "INSERT INTO Cinema (IdCinema, Nome, Città) \
-        VALUES(?, ?, ?)"
+    sql_querty_cl = "INSERT INTO Cliente (CF, Nome, Cognome, Età) \
+        VALUES(?, ?, ?, ?) "
     sql_querty_f = """INSERT INTO Film (IdFilm, Titolo, Regista) \
         VALUES(?, ?, ?) """
     try:
         cinema = [('1', 'The Space', 'Vimercate'), ('2', 'Arcadia', 'Bellinzago'),\
         ('3', 'The movie', 'Busnago'), ('4', 'The Space', 'Torino'),\
         ('5', 'Arcadia', 'Melzo')]
-        sql_querty_cl = "INSERT INTO Cliente (CF, Nome, Cognome, Età) \
-        VALUES(?, ?, ?, ?) "
+        sql_querty_c = "INSERT INTO Cinema (IdCinema, Nome, Città) \
+        VALUES(?, ?, ?)"
         mydb.executemany(sql_querty_c, cinema)
         mydb.commit()
     except Error as error:
@@ -119,8 +119,9 @@ def found_table(connection):
 def insert_clienti(cf, nome, cognome, age):
 	conn= sqlite3.connect('ticketapp.db')
 	try:
-		conn.execute("INSERT INTO Cliente (CF, Nome, Cognome, Età) VALUES (?, ?, ?, ?)" (str(cf)
-        , str(nome), str(cognome), str(age)))
+	    insert_new_cliente = "INSERT INTO Cliente(CF, Nome, Cognome, Età) VALUES (?, ?, ?, ?)"
+		cliente = ((str(cf), str(nome), str(cognome), str(age))
+		conn.executemany(insert_new_cliente, cliente)
 		conn.commit()
 	except:
 		conn.close()
