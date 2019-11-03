@@ -20,8 +20,8 @@ def index():
         "index.html", main=True, cliente=cliente, cinema=cinema, film=film
     )
 
-@APP.route('/getreginfouser', methods=['GET', 'POST'])
 '''Add client for buy ticket'''
+@APP.route('/getreginfouser', methods=['GET', 'POST'])
 def getreginfouser():
     codf = request.form['codice_fiscale']
     nome = request.form['nome']
@@ -43,8 +43,8 @@ def getreginfouser():
         film=film
     )
 
-@APP.route('/printticket', methods=['GET', 'POST'])
 '''Insert ticket and print it '''
+@APP.route('/printticket', methods=['GET', 'POST'])
 def printticket():
     codf = request.form['codice_fiscale']
     id_c = request.form['cinema_id']
