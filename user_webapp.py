@@ -5,59 +5,58 @@ import back_database
 import sqlite3
 
 back_database.create_db()
-app = Flask(__name__)
-_cf = ""
-id_cinema = ""
-id_film = ""
-
-@app.route("/")
+APP = Flask(__name__)
+_CF = ""
+ID_CINEMA = ""
+ID_FILM = ""
+'''return home page'''
+@APP.route("/")
 def index():
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
+    connection.close()
     return render_template(
         "index.html", main=True, cliente=cliente, cinema=cinema, film=film
     )
-    connection.close()
-
-@app.route('/getRegInfoUser', methods=['GET', 'POST'])
-def getRegInfoUser():
-    cf = request.form['codice_fiscale']
+'''Add client for buy ticket'''
+@APP.route('/getreginfouser', methods=['GET', 'POST'])
+def getreginfouser():
+    codf = request.form['codice_fiscale']
     nome = request.form['nome']
     cognome = request.form['cognome']
     age = request.form['età']
-    print(cf)
+    print(codf)
     print(age)
-    user = back_database.insert_clienti(cf, nome, cognome, age)
+    user = back_database.insert_clienti(codf, nome, cognome, age)
     print(user)
-    global _cf
-    _cf = cf
+    global _CF
+    _CF = codf
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-
+    connection.close()
     return render_template(
         "index.html", main=True,
         cliente=cliente,
         cinema=cinema,
         film=film
     )
-    connection.close()
 
-@app.route('/printTicket', methods=['GET', 'POST'])
-def printTicket():
-    cf = request.form['codice_fiscale']
+'''Insert ticket and print it '''
+@APP.route('/printticket', methods=['GET', 'POST'])
+def printticket():
+    codf = request.form['codice_fiscale']
     id_c = request.form['cinema_id']
     id_f = request.form['film_id']
-    ticket = back_database.print_biglietto(cf, id_c, id_f)
+    ticket = back_database.print_biglietto(codf, id_c, id_f)
     connection = sqlite3.connect('ticketapp.db')
     cliente, cinema, film = back_database.found_table(connection)
-
+    connection.close()
     return render_template(
         "index.html", main=True,
         cliente=cliente,
         cinema=cinema,
         film=film
     )
-    connection.close()
 
 '''
 @app.route('/getFilm', methods=['GET', 'POST'])
