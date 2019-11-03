@@ -20,7 +20,7 @@ def index():
     )
     connection.close()
 
-@app.route('/getInfoUser', methods=['GET', 'POST'])
+@app.route('/getRegInfoUser', methods=['GET', 'POST'])
 def getInfoUser():
     cf = request.form['codice_fiscale']
     nome = request.form['nome']
