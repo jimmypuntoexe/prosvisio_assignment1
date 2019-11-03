@@ -1,7 +1,7 @@
 # 2019 assignment1
 
 ### DEVELOPERS
-*Balducci Gianmaria 807141*``
+*Balducci Gianmaria 807141*
 
 *Guidi Alessandro 808865*
 
